@@ -12,23 +12,23 @@ function Framework.OpenInputMenu(inputType, header, inputs)
             if v.type == "number" or v.type == "input" then
                 table.insert(oxInputs, {
                     type = v.type,
-                    label = v.text,
+                    label = v.label,
                     default = v.default or nil,
                 })
             elseif v.type == "checkbox" then
                 table.insert(oxInputs, {
                     type = 'checkbox',
-                    label = v.text,
+                    label = v.label,
                     default = v.default or false,
                 })
             elseif v.type == "select" then
                 local options = {}
                 for _, option in ipairs(v.options) do
-                    table.insert(options, {value = option.value, label = option.text})
+                    table.insert(options, {value = option.value, label = option.label})
                 end
                 table.insert(oxInputs, {
                     type = 'select',
-                    label = v.text,
+                    label = v.label,
                     options = options,
                 })
             end
