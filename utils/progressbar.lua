@@ -22,6 +22,7 @@ function Framework.ProgressBar(name, label, duration, controls)
         }, {}, {}, function()
         end)
         Wait(duration * 1000) -- ⚠️ IN SOME PROGRESS BARS, THE WAIT FUNCTION IS NOT REQUIRED, IN THIS CASE, PLEASE COMMENT WAIT FUNCTION!
+        return true 
     ----------------- ESX ProgressBar -----------------
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'esx' then 
         ESX.Progressbar(label, duration * 1000,{
@@ -47,10 +48,12 @@ function Framework.ProgressBar(name, label, duration, controls)
                 mouse = controls.mouse,
             },
         })
+        return true 
     ----------------- Other ProgressBar -----------------
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'other' then 
         -- Here you can add your own progress bar
 
         Wait(duration * 1000) -- ⚠️ IN SOME PROGRESS BARS, THE WAIT FUNCTION IS NOT REQUIRED, IN THIS CASE, PLEASE COMMENT WAIT FUNCTION!
+        return true 
     end 
 end
