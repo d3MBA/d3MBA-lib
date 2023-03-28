@@ -7,7 +7,8 @@
 ---@param length <number> - The length of time to display the notification (in milliseconds (ms))
 
 RegisterNetEvent("d3MBA-lib:sendNotification", function(text, type, length)
-    length = length or 5000 -- 5 seconds
+    local type = type or Framework.NotificationsSettings.Info -- Default to info notification if no type is specified 
+    local length = length or 5000 -- 5 seconds
     --------------------------- QB-CORE ---------------------------
     if StringTrim(Framework.Notifications) == "qbcore" then 
         TriggerEvent("QBCore:Notify", text, type, length) -- e.g. for QB-CORE notifications
