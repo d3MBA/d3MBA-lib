@@ -7,5 +7,8 @@
 --  Example: Framework.Fuel(playerVehicle, 20.0)
 
 function Framework.Fuel(vehicle, fuel)
+    local vehicle = vehicle or GetVehiclePedIsIn(PlayerPedId(), false) -- Default to the vehicle the player is in if no vehicle is specified 
+    local fuel = fuel or 50.0 -- Default to 50.0 if no fuel is specified 
+    
     exports[Framework.FuelScript]:SetFuel(vehicle, fuel)
 end 
