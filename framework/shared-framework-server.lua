@@ -83,4 +83,24 @@ function Framework.RegisterStash(id, label, slots, weight, owner, groups, coords
     end
 end
 
+-- Returns the label for a given item
+--- @param item <string> - The item to get the label for
+--- @param category <string> - The category of the item - (from which script is item from)
 
+function Framework.GetItemLabel(item, category)
+    local ItemLabel = nil 
+    if item == nil or item == ' ' or item == '' then
+        print("^1---------------- WARNING ----------------")
+        print("^3Framework.GetItemLabel: No item given")
+        print("^1---------------- WARNING ----------------")
+    else
+        if Framework.SpecificItemLabels == true then 
+            ItemLabel = ItemLabels[category][item] 
+        elseif Framework.Framework == 'esx' then
+            ItemLabel = ItemLabels[category][item] 
+        elseif Framework.Framework == 'qbcore' then
+            ItemLabel = QBCore.Shared.Items[item].label
+        end
+    end 
+    return ItemLabel 
+end
