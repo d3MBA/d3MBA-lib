@@ -58,17 +58,32 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
 
     for k, v in pairs(menuOptions) do 
         if menuType == "qb-menu" then
-            table.insert(menu, {
-                header = v.title,
-                txt = v.context,
-                icon = v.icon or nil, 
-                disabled = v.disabled or false,
-                params = {
-                    isServer = v.isServer or false,
-                    event = v.event or nil,
-                    args = v.args or nil,
-                }
-            })
+            if v.image == nil or v.image == "" or v.image == " " then -- if image is nil 
+                table.insert(menu, {
+                    header = v.title,
+                    txt = v.context,
+                    icon = v.icon or nil, 
+                    disabled = v.disabled or false,
+                    params = {
+                        isServer = v.isServer or false,
+                        event = v.event or nil,
+                        args = v.args or nil,
+                    },                 
+                })
+            elseif v.image ~= nil then -- if image is not nil then add image to menu  
+                    table.insert(menu, {
+                        header = v.image .. " " .. v.title,
+                        txt = v.context,
+                        icon = v.icon or nil, 
+                        disabled = v.disabled or false,
+                        params = {
+                            isServer = v.isServer or false,
+                            event = v.event or nil,
+                            args = v.args or nil,
+                        },                 
+                    })
+                    
+            end 
         elseif menuType == "nh-context" then
             table.insert(menu, {
                 header = v.title,
@@ -76,6 +91,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                 icon = v.icon or nil,
                 disabled = v.disabled or false,
                 server = v.isServer or false,
+                image = v.image or nil, 
                 event = v.event or nil,
                 args = {v.args or nil},
             })
@@ -85,6 +101,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                     title = v.title,
                     description = v.context,
                     icon = v.icon or nil, 
+                    image = v.image or nil, 
                     disabled = v.disabled or false,
                     event = v.event,
                     args = v.args or nil,
@@ -94,6 +111,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                     title = v.title,
                     description = v.context,
                     icon = v.icon or nil, 
+                    image = v.image or nil, 
                     disabled = v.disabled or false,
                     serverEvent = v.event,
                     args = v.args or nil,
