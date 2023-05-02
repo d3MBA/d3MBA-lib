@@ -18,9 +18,9 @@ end)
 function StartResources(resources) 
     for i, resource in ipairs(resources) do
         StopResource(resource)
-        Wait(500) 
+        Wait(250) 
         StartResource(resource)
-        Wait(1000) -- Wait for 1.0 seconds between starting each script
+        Wait(500) -- Wait for 0.5 seconds between starting each script
     end
 end
 
