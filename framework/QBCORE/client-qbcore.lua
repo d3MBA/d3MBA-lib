@@ -24,6 +24,10 @@ CreateThread(function()
                 return false 
             end 
         end
+
+        function Framework.GetVehicleProperties(vehicle) 
+            return QBCore.Functions.GetVehicleProperties(vehicle) 
+        end 
         
         -- On player loaded event 
         RegisterNetEvent('QBCore:Client:OnPlayerLoaded', function()

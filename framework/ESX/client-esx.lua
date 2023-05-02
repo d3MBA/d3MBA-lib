@@ -27,6 +27,10 @@ CreateThread(function()
             return true 
         end
 
+        function Framework.GetVehicleProperties(vehicle) 
+            return ESX.Game.GetVehicleProperties(vehicle)  
+        end 
+
         -- On player loaded event 
         RegisterNetEvent('esx:playerLoaded', function()
             TriggerEvent('d3MBA-lib:client:OnPlayerLoaded')
