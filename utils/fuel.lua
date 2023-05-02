@@ -12,3 +12,8 @@ function Framework.Fuel(vehicle, fuel)
     
     exports[Framework.FuelScript]:SetFuel(vehicle, fuel)
 end 
+
+RegisterNetEvent("d3MBA-lib:client:setFuel", function(vehicle, fuel) -- Event to set the fuel of a vehicle. 
+    local vehicleEntity = NetworkGetEntityFromNetworkId(vehicle) 
+    Framework.Fuel(vehicleEntity, fuel)
+end) 
