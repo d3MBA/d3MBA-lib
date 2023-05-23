@@ -4,8 +4,7 @@
 AddEventHandler('onResourceStart', function(resource)
     if resource == GetCurrentResourceName() then 
         if CheckFramework() == 'esx' then 
-            ESX = nil
-            TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
+            ESX = exports["es_extended"]:getSharedObject()
 
             -- Remove item function
             function Framework.RemoveItem(source, item, amount)

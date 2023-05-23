@@ -3,14 +3,7 @@
 
 CreateThread(function() 
     if CheckFramework() == 'esx' then
-        ESX = nil
-
-        CreateThread(function()
-            while ESX == nil do
-                TriggerEvent('esx:getSharedObject', function(obj) ESX = obj end)
-                Wait(0)
-            end
-        end)
+        ESX = exports["es_extended"]:getSharedObject()
 
         function Framework.CheckJob(source, job)
             if job == nil then return false end 
