@@ -16,12 +16,12 @@ AddEventHandler('onResourceStart', function(resource)
             end 
 
             -- Add item function
-            function Framework.AddItem(source, item, amount)
+            function Framework.AddItem(source, item, amount, metadata)
                 local Player = QBCore.Functions.GetPlayer(source)
                 local amount = amount or 1 
 
-                local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount) -- Weight check 
-                if AddItem == true then 
+                local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, metadata) -- Weight check 
+                if AddItem == true then
                     TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add", amount)
                     return true 
                 else

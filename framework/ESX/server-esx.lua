@@ -16,12 +16,12 @@ AddEventHandler('onResourceStart', function(resource)
             end 
 
             -- Add item function
-            function Framework.AddItem(source, item, amount)
+            function Framework.AddItem(source, item, amount, metadata)
                 local Player = ESX.GetPlayerFromId(source)
                 local amount = amount or 1
 
                 if Player.canCarryItem(item, amount) then -- Weight check 
-                    Player.addInventoryItem(item, amount)
+                    Player.addInventoryItem(item, amount, metadata)
                     return true 
                 else
                     return false 

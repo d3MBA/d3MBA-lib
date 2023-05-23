@@ -7,11 +7,12 @@ author "d3MBA#0001"
 description "Library for QB-CORE / ESX framework"
 discord "discord.gg/d3MBA"
 
-version "1.0.2" -- Don't touch this
+version "1.0.3" -- Don't touch this
 
 shared_scripts {
     'config.lua', -- Config file for the library 
     '@ox_lib/init.lua', -- For ox_lib uncomment this
+    '@es_extended/imports.lua', -- For ESX 
     'framework/shared-functions.lua', -- Shared functions for the library
     'utils/fuel.lua', 
     'item-labels/labels.lua',
