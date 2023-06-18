@@ -136,6 +136,44 @@ AddEventHandler('onResourceStart', function(resource)
                 cb(Framework.GetPlayerData(source))
             end)
 
+            -- Callback function to check if a player has a specific item and a certain amount of it
+            --- @param source <string> - representing the source from which the call is originated
+            --- @param cb <function> - representing a callback function to be called after the operations
+            --- @param ItemName <string> - representing the name of the item to be checked
+            --- @param Amount <number> - representing the quantity of the item to be checked
+            Framework.CreateCallback('d3MBA-lib:server:CheckIfPlayerHasItem', function(source, cb, ItemName, Amount)
+                local Warning = "^1---------------- WARNING ----------------"
+                if ItemName == nil and Amount == nil then
+                    print(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Item name and amount is nil\n"..Warning)
+                    cb(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Item name and amount is nil\n"..Warning)
+                elseif ItemName == nil then
+                    print(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Item name is nil\n"..Warning)
+                    cb(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Item name is nil\n"..Warning)
+                elseif Amount == nil then
+                    print(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Amount is nil\n"..Warning)
+                    cb(Warning.."\n^3Callback:d3MBA-lib:server:CheckIfPlayerHasItem: Amount is nil\n"..Warning)
+                end
+
+                -- If the source has the item in the specified amount, return true
+                if Framework.HasItem(source, ItemName, Amount) == true then
+                    cb(true)
+                -- If the source does not have the item in the specified amount, return false
+                else
+                    cb(false)
+                end
+            end)
+
+            -- Event function to remove a specific item and a certain amount of it from the player's inventory
+            --- @param ItemName <string> - representing the name of the item to be removed
+            --- @param Amount <number> - representing the quantity of the item to be removed
+            RegisterNetEvent('d3MBA-lib:server:RemoveItem', function(ItemName, Amount)
+                if ItemName == nil then return end 
+                -- If the source has the item in the specified amount, remove it
+                if Framework.HasItem(source, ItemName, Amount) == true then
+                    Framework.RemoveItem(source, ItemName, Amount)
+                end
+            end)
+
         end 
     end  
 end)

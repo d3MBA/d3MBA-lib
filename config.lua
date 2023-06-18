@@ -15,15 +15,15 @@ Framework.AddResourecesManually = false -- [ true / false ] Set true if you want
 Framework.Resources = {} -- Add resources manually here if Framework.AddResourecesManually is true
 
 Framework.Database = '' -- [ 'mysql-async' / 'oxmysql' / 'ghmattimysql' ] Choose your SQL
-Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework 
+Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework
 
 Framework.Inventory = '' -- [ 'qb-inventory' /  'lj-inventory' / 'ox_inventory' / 'qs-inventory' ] Choose your inventory
 
 Framework.LicenseType = '' -- [ 'license' / 'steam' / 'cid' = (QBCORE = Citizen ID, ESX = Multicharacter identifier) ]
 Framework.LicenseWithoutPrefix = true -- Remove [ license: / steam: ] Prefix from license
 
-Framework.Target = '' -- [ 'qb-target' / 'qtarget' ] Set the target script name
-Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] Set the menu 
+Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ox_target = 'qtarget' ] Set the target script name
+Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] Set the menu
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
 Framework.FuelScript = 'LegacyFuel' -- [ 'LegacyFuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
@@ -32,9 +32,9 @@ Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'o
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications
 
-Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'other' ] Set the progressbar script 
+Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'other' ] Set the progressbar script
 
-Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'other' ] Set the notifications script 
+Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {
     Info = 'primary', 
     Error = 'error', 
@@ -42,3 +42,4 @@ Framework.NotificationsSettings = {
 }
 
 Framework.SpecificItemLabels = false -- [ true / false ] Set true if you want to use specific item labels for each item (item-laebls/labels.lua)
+
