@@ -97,7 +97,7 @@ function Framework.GetItemLabel(item)
             ItemLabel = ItemLabels[item] 
         elseif Framework.Framework == 'esx' then
             ItemLabel = ItemLabels[item] 
-        elseif Framework.Framework == 'qbcore' then
+        elseif Framework.Framework == 'qbcore' and Framework.SpecificItemLabels == false then
             ItemLabel = QBCore.Shared.Items[item].label
         end
     end 
