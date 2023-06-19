@@ -3,7 +3,7 @@
 
 CreateThread(function() 
     if CheckFramework() == 'qbcore' then
-        QBCore = exports["qb-core"]:GetCoreObject()
+        QBCore = exports[Framework.CoreObject]:GetCoreObject()
         
         -- Check player job  
         function Framework.CheckJob(source, job)

@@ -1,6 +1,12 @@
 -- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
+CreateThread(function() 
+    if StringTrim(string.lower(Framework.Target)) == "ox_target" then 
+        Framework.Target = "qtarget"
+    end 
+end)
+
 
 -- Open stash 
 -- This function opens a stash with the given name, number of slots, and weight.
@@ -45,7 +51,7 @@ function Framework.TriggerServerCallback(name, ...)
     -- QB-CORE
     if Framework.Framework == "qbcore" then 
         -- Get the QBCore object
-        QBCore = exports["qb-core"]:GetCoreObject()
+        QBCore = exports[Framework.CoreObject]:GetCoreObject()
 
         -- Trigger the callback
         QBCore.Functions.TriggerCallback(name, function(result)

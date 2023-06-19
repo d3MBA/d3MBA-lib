@@ -4,7 +4,7 @@
 AddEventHandler('onResourceStart', function(resource)
     if resource == GetCurrentResourceName() then         
         if CheckFramework() == 'qbcore' then
-            QBCore = exports["qb-core"]:GetCoreObject()
+            QBCore = exports[Framework.CoreObject]:GetCoreObject()
 
             -- Remove item function
             function Framework.RemoveItem(source, item, amount)

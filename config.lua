@@ -17,6 +17,8 @@ Framework.Resources = {} -- Add resources manually here if Framework.AddResourec
 Framework.Database = '' -- [ 'mysql-async' / 'oxmysql' / 'ghmattimysql' ] Choose your SQL
 Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework
 
+Framework.CoreObject = '' -- [ 'qb-core' / 'qbx-core' ] Choose your core object (Only for QBCore and Qbox framework)
+
 Framework.Inventory = '' -- [ 'qb-inventory' /  'lj-inventory' / 'ox_inventory' / 'qs-inventory' ] Choose your inventory
 
 Framework.LicenseType = '' -- [ 'license' / 'steam' / 'cid' = (QBCORE = Citizen ID, ESX = Multicharacter identifier) ]
