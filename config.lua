@@ -36,7 +36,7 @@ Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false 
 
 Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'other' ] Set the progressbar script
 
-Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'other' ] Set the notifications script
+Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'ox_lib' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {
     Info = 'primary', 
     Error = 'error', 

@@ -21,6 +21,12 @@ RegisterNetEvent("d3MBA-lib:sendNotification", function(text, type, length)
     --------------------------- CODEM ---------------------------
     elseif StringTrim(Framework.Notifications) == "codem" then
         TriggerEvent('codem-notification', text, length, type) -- e.g. for codem notifications
+    elseif StringTrim(Framework.Notifications) == "ox_lib" then -- e.g. for ox_lib notifications
+        lib.notify({
+            description = text,
+            type = type,
+            duration = length, 
+        })
     --------------------------- OTHER ---------------------------
     elseif StringTrim(Framework.Notifications) == "other" then
         -- Add your notification event or export here 
