@@ -174,6 +174,34 @@ AddEventHandler('onResourceStart', function(resource)
                 end
             end)
 
+            -- Callback function to check if a player has a specific item and a certain amount of it
+            --- @param source <string> - representing the source from which the call is originated
+            --- @param cb <function> - representing a callback function to be called after the operations
+            --- @param account <string> - representing the name of the account to be checked
+            --- @param amount <number> - representing the amount of the account to be checked
+
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerMoney', function(source, cb, account, amount)
+                local Warning = function(msg) 
+                    local warningMsg = "^1---------------- WARNING ----------------\n^3Callback:d3MBA-lib:server:GetPlayerMoney: %s is nil\n^1---------------- WARNING ----------------"
+                    print(string.format(warningMsg, msg))
+                    cb(string.format(warningMsg, msg))
+                end
+            
+                if account == nil and amount == nil then
+                    Warning("Account and amount")
+                    return
+                elseif account == nil then
+                    Warning("Account")
+                    return
+                elseif amount == nil then
+                    Warning("Amount")
+                    return
+                end
+            
+                -- If the source has the money in the specified account and amount, return true
+                cb(Framework.GetMoney(source, account, amount))
+            end)
+
         end 
     end  
 end)
