@@ -34,7 +34,7 @@ Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'o
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications
 
-Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'other' ] Set the progressbar script
+Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'ox_lib_circle' / 'mythic' / 'other' ] Set the progressbar script
 
 Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'ox_lib' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {

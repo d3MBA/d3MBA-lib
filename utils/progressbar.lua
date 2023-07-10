@@ -33,6 +33,7 @@ function Framework.ProgressBar(name, label, duration, controls)
                 lib ="" 
             }, 
         })
+        return true
     ----------------- OX ProgressBar -----------------
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib' then 
     -- E.G. FOR OX_LIB PROGRESSBAR, ⚠️IF YOU WANT TO USE OX_LIB PROGRESS BAR YOU NEED TO ADD THIS TO THE fxmanifest.lua file - (shared_script '@ox_lib/init.lua') AND COMMENT WAIT FUNCTION BELOW!⚠️
@@ -49,6 +50,39 @@ function Framework.ProgressBar(name, label, duration, controls)
             },
         })
         return true 
+    ----------------- ox_lib circle progressBar -----------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib_circle' then  
+        lib.progressCircle({
+            duration = duration * 1000,
+            position = 'bottom',
+            useWhileDead = false,
+            canCancel = false,
+            disable = {
+                move = controls.movement,
+                car = controls.carMovement,
+                combat = controls.combat,
+                mouse = controls.mouse,
+            },
+        })
+        return true
+    ------------------- Mythic ProgressBar -------------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'mythic' then 
+        TriggerEvent("mythic_progressbar:client:progress", {
+            name = name,
+            duration = duration * 1000,
+            label = label,
+            useWhileDead = false,
+            canCancel = false,
+            controlDisables = {
+                disableMovement = controls.movement,
+                disableCarMovement = controls.carMovement,
+                disableMouse = controls.mouse,
+                disableCombat = controls.combat,
+            },
+            }
+        )
+        Wait(duration * 1000)
+        return true
     ----------------- Other ProgressBar -----------------
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'other' then 
         -- Here you can add your own progress bar
