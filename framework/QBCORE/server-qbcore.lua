@@ -132,10 +132,13 @@ AddEventHandler('onResourceStart', function(resource)
             
                 if ItemName == nil and Amount == nil then
                     Warning("Item name and amount")
+                    return
                 elseif ItemName == nil then
                     Warning("Item name")
+                    return
                 elseif Amount == nil then
                     Warning("Amount")
+                    return
                 end
             
                 cb(Framework.HasItem(source, ItemName, Amount))
