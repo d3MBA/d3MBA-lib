@@ -10,7 +10,11 @@ function Framework.Fuel(vehicle, fuel)
     local vehicle = vehicle or GetVehiclePedIsIn(PlayerPedId(), false) -- Default to the vehicle the player is in if no vehicle is specified 
     local fuel = fuel or 50.0 -- Default to 50.0 if no fuel is specified 
     
-    exports[Framework.FuelScript]:SetFuel(vehicle, fuel)
+    if Framework.FuelScript == "ox_fuel" then -- If the fuel script is ox_fuel, set the fuel level using the ox_fuel function. 
+        Entity(vehicle).state.fuel = fuel
+    else
+        exports[Framework.FuelScript]:SetFuel(vehicle, fuel)
+    end 
 end 
 
 RegisterNetEvent("d3MBA-lib:client:setFuel", function(vehicle, fuel) -- Event to set the fuel of a vehicle. 
