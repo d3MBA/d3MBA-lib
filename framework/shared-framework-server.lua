@@ -87,19 +87,28 @@ end
 --- @param item <string> - The item to get the label for
 
 function Framework.GetItemLabel(item)
-    local ItemLabel = nil 
+    local WarningMsg = "^1---------------- WARNING ----------------\n^3Framework.GetItemLabel: Item - (%s) not found in %s\n^1---------------- WARNING ----------------"
+    local ItemLabelsFile = "d3MBA-lib/item-labels/labels.lua"
+    local ItemLabel = "ITEM LABEL NOT FOUND" 
     if item == nil or item == ' ' or item == '' then
-        print("^1---------------- WARNING ----------------")
-        print("^3Framework.GetItemLabel: No item given")
-        print("^1---------------- WARNING ----------------")
+        print(string.format(WarningMsg, "No item given"))
     else
-        if Framework.SpecificItemLabels == true then 
-            ItemLabel = ItemLabels[item] 
-        elseif Framework.Framework == 'esx' then
-            ItemLabel = ItemLabels[item] 
+        if Framework.SpecificItemLabels == true or Framework.Framework == 'esx' then
+            if ItemLabels[item] ~= nil then
+                ItemLabel = ItemLabels[item] 
+            else
+                print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
+            end
         elseif Framework.Framework == 'qbcore' and Framework.SpecificItemLabels == false then
-            ItemLabel = QBCore.Shared.Items[item].label
+            QBCore = exports[Framework.CoreObject]:GetCoreObject()
+            if QBCore.Shared.Items[item] ~= nil then
+                ItemLabel = QBCore.Shared.Items[item].label
+            else
+                ItemLabelsFile = "QBCore.Shared.Items"
+                print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
+            end
         end
     end 
     return ItemLabel 
 end
+
