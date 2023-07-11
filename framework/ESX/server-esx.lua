@@ -228,6 +228,11 @@ AddEventHandler('onResourceStart', function(resource)
                 cb(Framework.GetInventory(source))
             end)
             
+            -- Check if player is admin callback
+            ---@param source <number> -  The player to check (ID)
+            Framework.CreateCallback('d3MBA-lib:server:IsPlayerAdmin', function(source, cb)
+                cb(Framework.IsPlayerAdmin(source))
+            end)
 
         end 
     end  
