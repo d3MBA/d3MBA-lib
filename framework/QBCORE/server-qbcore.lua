@@ -215,6 +215,29 @@ AddEventHandler('onResourceStart', function(resource)
                 -- If the source has the money in the specified account and amount, return true
                 cb(Framework.GetMoney(source, account, amount))
             end)
+            
+            -- Event function to remove a specific amount of money 
+            ---@param account <string> - representing the name of the account to be removed
+            ---@param amount <number> - representing the amount of the account to be removed
+            RegisterNetEvent("d3MBA-lib:server:RemoveMoney", function(account, amount)
+                local Warning = function(msg) 
+                    local warningMsg = "^1---------------- WARNING ----------------\n^3Event:d3MBA-lib:server:RemoveMoney: %s is nil\n^1---------------- WARNING ----------------"
+                    print(string.format(warningMsg, msg))
+                end
+
+                if account == nil and amount == nil then 
+                    Warning("Account and amount")
+                    return
+                elseif amount == nil then
+                    Warning("Amount")
+                    return
+                end
+
+                -- If the source has the money in the specified account and amount, remove it
+                if Framework.GetMoney(source, account, amount) == true then
+                    Framework.RemoveMoney(source, account, amount)
+                end
+            end)
 
             -- Callback function to get a player's inventory
             --- @param source <string> - representing the source from which the call is originated
