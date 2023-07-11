@@ -54,6 +54,17 @@ function Framework.GetPlayerIdentifiers(source)
     return identifier -- return player identifier 
 end
 
+-- Check if player is admin 
+---@param source <number> -  The player to check (ID)
+function Framework.IsPlayerAdmin(source)
+    for k, v in pairs(Framework.AcePermissions) do
+        if IsPlayerAceAllowed(source, v) then
+            return true
+        end
+    end
+    return false
+end
+
 
 -- Register stash
 ---@param id <number> - The ID of the stash

@@ -12,7 +12,7 @@ version "1.0.4" -- Don't touch this
 shared_scripts {
     'config.lua', -- Config file for the library 
     '@ox_lib/init.lua', -- For ox_lib uncomment this
-    '@es_extended/imports.lua', -- For ESX 
+    -- '@es_extended/imports.lua', -- For ESX framework uncomment this
     'framework/shared-functions.lua', -- Shared functions for the library
     'utils/fuel.lua', 
     'item-labels/labels.lua',

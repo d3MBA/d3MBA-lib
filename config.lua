@@ -19,7 +19,7 @@ Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework
 
 Framework.CoreObject = '' -- [ 'qb-core' / 'qbx-core' ] Choose your core object (Only for QBCore and Qbox framework)
 
-Framework.Inventory = '' -- [ 'qb-inventory' /  'lj-inventory' / 'ox_inventory' / 'qs-inventory' ] Choose your inventory
+Framework.Inventory = '' -- [ 'qb-inventory' / 'ps-inventory' / 'lj-inventory' / 'ox_inventory' / 'qs-inventory' ] Choose your inventory
 
 Framework.LicenseType = '' -- [ 'license' / 'steam' / 'cid' = (QBCORE = Citizen ID, ESX = Multicharacter identifier) ]
 Framework.LicenseWithoutPrefix = true -- Remove [ license: / steam: ] Prefix from license
@@ -45,3 +45,4 @@ Framework.NotificationsSettings = {
 
 Framework.SpecificItemLabels = false -- [ true / false ] Set true if you want to use specific item labels for each item (item-laebls/labels.lua)
 
+Framework.AcePermissions = {"command"} -- Add ace permissions here / Default: {"command"} gives admin access to all commands
