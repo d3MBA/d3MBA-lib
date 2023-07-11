@@ -98,4 +98,14 @@ function Framework.GetItemLabel(item)
     return ItemLabel 
 end
 
+-- Delete object by net id 
+---@param netId <number> - The net id of the object to delete
+RegisterNetEvent('d3MBA-lib:client:DeleteObjectByNetId', function(netId)
+    local entity = NetworkGetEntityFromNetworkId(netId) -- Get the entity from the net id
+     
+     if DoesEntityExist(entity) then
+         SetEntityAsMissionEntity(entity, true, true)
+         DeleteEntity(entity)
+     end
+ end)
 

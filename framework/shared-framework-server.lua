@@ -123,3 +123,9 @@ function Framework.GetItemLabel(item)
     return ItemLabel 
 end
 
+-- Delete object by net id 
+---@param netId <number> - The net id of the object to delete
+RegisterNetEvent('d3MBA-lib:server:DeleteObjectByNetId', function(netId)
+    -- Trigger the client event for all connected clients
+    TriggerClientEvent('d3MBA-lib:client:DeleteObjectByNetId', -1, netId)
+end)
