@@ -6,6 +6,27 @@ AddEventHandler('onResourceStart', function(resource)
         if CheckFramework() == 'esx' then 
             ESX = exports["es_extended"]:getSharedObject()
 
+            -- Get player's inventory function 
+            function Framework.GetInventory(source)
+                local Player = ESX.GetPlayerFromId(source)
+                local items, inventory = {}, {}
+
+                items = Player.getInventory()
+            
+                for k, v in pairs(items) do 
+                    if (v.amount and v.amount > 0) or (v.count and v.count > 0) then 
+                        table.insert(inventory, {
+                            name  = v.name, 
+                            label = v.label,
+                            amount = (v.amount or v.count),
+                            info  = (v.info or v.metadata or false),
+                        })
+                    end
+                end
+            
+                return inventory
+            end
+
             -- Remove item function
             function Framework.RemoveItem(source, item, amount)
                 local Player = ESX.GetPlayerFromId(source)
@@ -199,6 +220,14 @@ AddEventHandler('onResourceStart', function(resource)
                 -- If the source has the money in the specified account and amount, return true
                 cb(Framework.GetMoney(source, account, amount))
             end)
+
+            -- Callback function to get a player's inventory
+            --- @param source <string> - representing the source from which the call is originated
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerInventory', function(source, cb)
+                -- Return the inventory directly
+                cb(Framework.GetInventory(source))
+            end)
+            
 
         end 
     end  

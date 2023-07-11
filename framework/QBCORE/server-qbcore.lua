@@ -6,6 +6,27 @@ AddEventHandler('onResourceStart', function(resource)
         if CheckFramework() == 'qbcore' then
             QBCore = exports[Framework.CoreObject]:GetCoreObject()
 
+            -- Get player's inventory function 
+            function Framework.GetInventory(source)
+                local Player = QBCore.Functions.GetPlayer(source)
+                local items, inventory = {}, {}
+
+                items = Player.PlayerData.items
+            
+                for k, v in pairs(items) do 
+                    if (v.amount and v.amount > 0) or (v.count and v.count > 0) then 
+                        table.insert(inventory, {
+                            name  = v.name, 
+                            label = v.label,
+                            amount = (v.amount or v.count),
+                            info  = (v.info or v.metadata or false),
+                        })
+                    end
+                end
+            
+                return inventory
+            end
+
             -- Remove item function
             function Framework.RemoveItem(source, item, amount)
                 local Player = QBCore.Functions.GetPlayer(source)
@@ -162,7 +183,6 @@ AddEventHandler('onResourceStart', function(resource)
             --- @param cb <function> - representing a callback function to be called after the operations
             --- @param account <string> - representing the name of the account to be checked
             --- @param amount <number> - representing the amount of the account to be checked
-
             Framework.CreateCallback('d3MBA-lib:server:GetPlayerMoney', function(source, cb, account, amount)
                 local Warning = function(msg) 
                     local warningMsg = "^1---------------- WARNING ----------------\n^3Callback:d3MBA-lib:server:GetPlayerMoney: %s is nil\n^1---------------- WARNING ----------------"
@@ -184,6 +204,14 @@ AddEventHandler('onResourceStart', function(resource)
                 -- If the source has the money in the specified account and amount, return true
                 cb(Framework.GetMoney(source, account, amount))
             end)
+
+            -- Callback function to get a player's inventory
+            --- @param source <string> - representing the source from which the call is originated
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerInventory', function(source, cb)
+                -- Return the inventory directly
+                cb(Framework.GetInventory(source))
+            end)
+            
              
         end 
     end
