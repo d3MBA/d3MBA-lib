@@ -109,6 +109,19 @@ RegisterNetEvent('d3MBA-lib:client:DeleteObjectByNetId', function(netId)
      end
 end)
 
+-- Get closest entity of prop
+---@param propName <string> - The name of the prop to get the closest entity of
+---@param distance <number> - The distance to check for the closest entity
+function Framework.GetClosestEntityOfProp(propName, distance)
+    local propHash = GetHashKey(propName) -- get the hash of the prop name
+    local playerCoords = GetEntityCoords(PlayerPedId()) -- get the player's coordinates
+
+    -- use the GetClosestObjectOfType function to find the closest entity of the specified type
+    local entity = GetClosestObjectOfType(playerCoords.x, playerCoords.y, playerCoords.z, distance, propHash, false, false, false)
+
+    return entity -- return the entity id of the closest entity
+end
+
 -- Get nearby players
 ---@param coords <vector3> - The coords to check for nearby players
 ---@param radius <number> - The radius to check for nearby players
