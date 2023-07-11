@@ -42,33 +42,6 @@ function CheckFramework()
     end
 end
 
-
--- Request animation dict  
-function Framework.LoadAnimDict(dict) 
-    while (not HasAnimDictLoaded(dict)) do
-        RequestAnimDict(dict)
-        Wait(10)
-    end
-end
-
--- Load particles 
-function Framework.LoadPartiDict(dict)
-    if not HasNamedPtfxAssetLoaded(dict) then
-        RequestNamedPtfxAsset(dict)
-        while not HasNamedPtfxAssetLoaded(dict) do
-            Wait(10)
-        end
-    end
-end 
-
--- Load model 
-function Framework.LoadModel(model)
-    while not HasModelLoaded(model) do
-        RequestModel(model)
-        Wait(10)
-    end
-end
-
 exports('GetFrameworkObject', function()
     return Framework
 end)
