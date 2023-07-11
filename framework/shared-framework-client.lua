@@ -107,7 +107,38 @@ RegisterNetEvent('d3MBA-lib:client:DeleteObjectByNetId', function(netId)
          SetEntityAsMissionEntity(entity, true, true)
          DeleteEntity(entity)
      end
- end)
+end)
+
+-- Get nearby players
+---@param coords <vector3> - The coords to check for nearby players
+---@param radius <number> - The radius to check for nearby players
+---@param ignoreSource <boolean> - Whether or not to ignore the source player 
+function Framework.GetNearbyPlayers(coords, radius, ignoreSource)
+    local ignoreSource = ignoreSource or false
+    local player = PlayerId()
+    local nearbyPlayers = {}
+
+    local activePlayers = GetActivePlayers()
+    local activePlayersCount = #activePlayers
+
+    for i = 1, activePlayersCount do
+        local otherPlayer = activePlayers[i]
+        local otherPlayerPed = GetPlayerPed(otherPlayer)
+        local otherPlayerCoords = GetEntityCoords(otherPlayerPed)
+        local distance = #(coords - otherPlayerCoords)
+
+        if distance <= radius then
+            if otherPlayer == player and ignoreSource == true then
+                -- ignore the player who called the function
+            else
+                local otherPlayerServerId = GetPlayerServerId(otherPlayer)
+                table.insert(nearbyPlayers, otherPlayerServerId)
+            end
+        end
+    end
+
+    return nearbyPlayers
+end
 
 
 -- Load Anim
