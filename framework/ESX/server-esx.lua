@@ -108,6 +108,16 @@ AddEventHandler('onResourceStart', function(resource)
             function Framework.CreateUseableItem(item, cb)
                 ESX.RegisterUsableItem(item, cb)
             end 
+            
+            function Framework.GetPlayerName(source)
+                local Player = ESX.GetPlayerFromId(source)
+                return Player.getName()
+            end 
+
+            function Framework.GetPlayerFullName(source)
+                local Player = ESX.GetPlayerFromId(source)
+                return Player.getName()
+            end 
 
             function GetPlayerInfo(source)
                 local PlayerInfo = {}
@@ -124,7 +134,6 @@ AddEventHandler('onResourceStart', function(resource)
                 end
                 return PlayerInfo
             end
-            
             
             -- Get player data
             function Framework.GetPlayerData(source)
@@ -233,6 +242,18 @@ AddEventHandler('onResourceStart', function(resource)
             Framework.CreateCallback('d3MBA-lib:server:IsPlayerAdmin', function(source, cb)
                 cb(Framework.IsPlayerAdmin(source))
             end)
+
+            -- Check if player name callback 
+            ---@param source <number> -  The player to check (ID)
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerName', function(source, cb)
+                cb(Framework.GetPlayerName(source))
+            end) 
+
+            -- Check if player full name callback 
+            ---@param source <number> -  The player to check (ID)
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerFullName', function(source, cb)
+                cb(Framework.GetPlayerFullName(source))
+            end) 
 
         end 
     end  

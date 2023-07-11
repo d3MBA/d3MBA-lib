@@ -111,6 +111,16 @@ AddEventHandler('onResourceStart', function(resource)
                 QBCore.Functions.CreateUseableItem(item, cb) 
             end 
     
+            function Framework.GetPlayerName(source)
+                local Player = QBCore.Functions.GetPlayer(source)
+                return Player.PlayerData.charinfo.firstname
+            end 
+
+            function Framework.GetPlayerFullName(source)
+                local Player = QBCore.Functions.GetPlayer(source)
+                return Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname
+            end 
+
             -- Get player data
             function Framework.GetPlayerData(source)
                 local Player = QBCore.Functions.GetPlayer(source) 
@@ -216,6 +226,18 @@ AddEventHandler('onResourceStart', function(resource)
             ---@param source <number> -  The player to check (ID)
             Framework.CreateCallback('d3MBA-lib:server:IsPlayerAdmin', function(source, cb)
                 cb(Framework.IsPlayerAdmin(source))
+            end) 
+
+            -- Check if player name callback 
+            ---@param source <number> -  The player to check (ID)
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerName', function(source, cb)
+                cb(Framework.GetPlayerName(source))
+            end) 
+
+            -- Check if player full name callback 
+            ---@param source <number> -  The player to check (ID)
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerFullName', function(source, cb)
+                cb(Framework.GetPlayerFullName(source))
             end) 
              
         end 
