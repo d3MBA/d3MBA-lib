@@ -216,26 +216,32 @@ AddEventHandler('onResourceStart', function(resource)
                 cb(Framework.GetMoney(source, account, amount))
             end)
             
-            -- Event function to remove a specific amount of money 
-            ---@param account <string> - representing the name of the account to be removed
-            ---@param amount <number> - representing the amount of the account to be removed
-            RegisterNetEvent("d3MBA-lib:server:RemoveMoney", function(account, amount)
+            -- Callback function to check if a player has a specific amount of money and remove it
+            ---@param source <string> - representing the source from which the call is originated
+            ---@param cb <function> - representing a callback function to be called after the operations
+            ---@param account <string> - representing the name of the account to be checked 
+            ---@param amount <number> - representing the amount of the account to be checked and removed
+            Framework.CreateCallback('d3MBA-lib:server:RemoveMoney', function(source, cb, account, amount)
                 local Warning = function(msg) 
-                    local warningMsg = "^1---------------- WARNING ----------------\n^3Event:d3MBA-lib:server:RemoveMoney: %s is nil\n^1---------------- WARNING ----------------"
+                    local warningMsg = "^1---------------- WARNING ----------------\n^3Callback:d3MBA-lib:server:RemoveMoney: %s is nil\n^1---------------- WARNING ----------------"
                     print(string.format(warningMsg, msg))
+                    cb(string.format(warningMsg, msg))
                 end
-
-                if account == nil and amount == nil then 
+            
+                if account == nil and amount == nil then
                     Warning("Account and amount")
                     return
                 elseif amount == nil then
                     Warning("Amount")
                     return
                 end
-
-                -- If the source has the money in the specified account and amount, remove it
-                if Framework.GetMoney(source, account, amount) == true then
+            
+                -- If the source has the money in the specified account and amount, return true
+                if Framework.GetMoney(source, account, amount) == true then 
                     Framework.RemoveMoney(source, account, amount)
+                    cb(true)
+                else
+                    cb(false)
                 end
             end)
 
