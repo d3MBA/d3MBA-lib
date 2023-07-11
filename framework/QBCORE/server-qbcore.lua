@@ -117,6 +117,7 @@ AddEventHandler('onResourceStart', function(resource)
             end 
 
             function Framework.GetPlayerFullName(source)
+                print(source)
                 local Player = QBCore.Functions.GetPlayer(source)
                 return Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname
             end 
@@ -230,14 +231,22 @@ AddEventHandler('onResourceStart', function(resource)
 
             -- Check if player name callback 
             ---@param source <number> -  The player to check (ID)
-            Framework.CreateCallback('d3MBA-lib:server:GetPlayerName', function(source, cb)
-                cb(Framework.GetPlayerName(source))
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerName', function(source, cb, targetId)
+                if targetId ~= nil then 
+                    cb(Framework.GetPlayerName(targetId))
+                else
+                    cb(Framework.GetPlayerName(source))
+                end
             end) 
 
             -- Check if player full name callback 
             ---@param source <number> -  The player to check (ID)
-            Framework.CreateCallback('d3MBA-lib:server:GetPlayerFullName', function(source, cb)
-                cb(Framework.GetPlayerFullName(source))
+            Framework.CreateCallback('d3MBA-lib:server:GetPlayerFullName', function(source, cb, targetId)
+                if targetId ~= nil then 
+                    cb(Framework.GetPlayerFullName(targetId))
+                else
+                    cb(Framework.GetPlayerFullName(source))
+                end
             end) 
              
         end 
