@@ -109,3 +109,28 @@ RegisterNetEvent('d3MBA-lib:client:DeleteObjectByNetId', function(netId)
      end
  end)
 
+
+-- Load Anim
+---@param dict <string> - The name of the anim dict to load
+function Framework.LoadAnim(dict)
+    RequestAnimDict(dict); while not HasAnimDictLoaded(dict) do Wait(1) end
+end
+
+-- Load PTFX 
+---@param dict <string> - The name of the ptfx asset to load
+function Framework.LoadPtfxAsset(dict)
+    RequestNamedPtfxAsset(dict); while not HasNamedPtfxAssetLoaded(dict) do Wait(1) end
+end
+
+-- Load Model
+---@param model <string> - The name of the model to load
+function Framework.LoadModel(model)
+    if not HasModelLoaded(model) and IsModelInCdimage(model) then
+        RequestModel(model)
+
+        while not HasModelLoaded(model) do
+            Wait(0)
+        end
+    end
+end
+
