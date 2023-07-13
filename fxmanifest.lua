@@ -7,7 +7,7 @@ author "d3MBA#0001"
 description "Library for QB-CORE / ESX framework"
 discord "discord.gg/d3MBA"
 
-version "1.0.4" -- Don't touch this
+version "2.0.0" -- Don't touch this
 
 shared_scripts {
     'config.lua', -- Config file for the library 
@@ -30,6 +30,10 @@ server_scripts {
     'framework/ESX/server-esx.lua',
     'framework/shared-framework-server.lua',
     'framework/shared-functions.lua',
+    -- Script functions 
+    'script-functions/scripts-config.lua',
+    'script-functions/server/*.lua',
+    -- Version checker
     'version-check.lua',
 }
 
@@ -43,4 +47,7 @@ client_scripts {
     'framework/QBCORE/client-qbcore.lua',
     'framework/ESX/client-esx.lua',
     'framework/shared-functions.lua',
+    -- Script functions
+    'script-functions/scripts-config.lua',
+    'script-functions/client/*.lua',
 }
