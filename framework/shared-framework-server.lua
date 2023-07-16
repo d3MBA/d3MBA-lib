@@ -1,6 +1,11 @@
 -- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
+CreateThread(function() 
+    if StringTrim(string.lower(Framework.Target)) == "ox_target" then 
+        Framework.Target = "qtarget"
+    end 
+end)
 
 -- Error print
 ---@param type <string> -  Type of error 

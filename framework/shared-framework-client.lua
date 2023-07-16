@@ -1,13 +1,6 @@
 -- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
-CreateThread(function() 
-    if StringTrim(string.lower(Framework.Target)) == "ox_target" then 
-        Framework.Target = "qtarget"
-    end 
-end)
-
-
 -- Open stash 
 -- This function opens a stash with the given name, number of slots, and weight.
 ---@param stashName <string> - The name of the stash to open
