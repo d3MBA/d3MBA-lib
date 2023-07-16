@@ -28,7 +28,7 @@ Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ox_target = 'qtarget' ] Set
 Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] Set the menu
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
-Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
+Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'cdn-fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
 Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
 
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'other' ] Set the phone script name (phone notifications)
