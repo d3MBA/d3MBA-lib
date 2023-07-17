@@ -7,6 +7,12 @@
 ---@param slots <number> - The number of slots in the stash
 ---@param weight <number> - The maximum weight that can be stored in the stash
 
+CreateThread(function() 
+    if StringTrim(string.lower(Framework.Target)) == "ox_target" then 
+        Framework.Target = "qtarget"
+    end 
+end)
+
 function Framework.OpenStash(stashName, slots, weight) 
     ----------------- QB-INVENTORY -----------------
     if StringTrim(string.lower(Framework.Inventory)) == 'qb-inventory' then
