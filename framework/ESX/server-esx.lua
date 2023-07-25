@@ -19,6 +19,7 @@ AddEventHandler('onResourceStart', function(resource)
                             name  = v.name, 
                             label = v.label,
                             amount = (v.amount or v.count),
+                            weight = (v.weight or 0), 
                             info  = (v.info or v.metadata or false),
                         })
                     end
