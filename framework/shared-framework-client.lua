@@ -177,3 +177,12 @@ function Framework.LoadModel(model)
     end
 end
 
+-- TurnPlayerToFaceEntity
+---@param playerCoords <vector3> - The coords of the player
+---@param entityCoords <vector3> - The coords of the entity to face
+function Framework.TurnPlayerToFaceEntity(playerCoords, entityCoords)
+    local playerHeading = GetHeadingFromVector_2d(entityCoords.x - playerCoords.x, entityCoords.y - playerCoords.y)
+    
+    SetEntityCoordsNoOffset(PlayerPedId(), playerCoords.x, playerCoords.y, playerCoords.z, true, true, true)
+    SetEntityHeading(PlayerPedId(), playerHeading)
+end
