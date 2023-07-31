@@ -302,7 +302,3 @@ AddEventHandler('onResourceStart', function(resource)
         end 
     end
 end)
-
-RegisterCommand("checkox", function()
-
-end)
