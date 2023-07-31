@@ -33,20 +33,36 @@ AddEventHandler('onResourceStart', function(resource)
                 local Player = ESX.GetPlayerFromId(source)
                 local amount = amount or 1
 
-                Player.removeInventoryItem(item, amount)
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:RemoveItem(source, item, amount) == true then 
+                        return true 
+                    else
+                        return false 
+                    end 
+                else
+                    Player.removeInventoryItem(item, amount)
+                end 
             end 
 
             -- Add item function
             function Framework.AddItem(source, item, amount, metadata)
                 local Player = ESX.GetPlayerFromId(source)
                 local amount = amount or 1
-
-                if Player.canCarryItem(item, amount) then -- Weight check 
-                    Player.addInventoryItem(item, amount, metadata)
-                    return true 
+                
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:AddItem(source, item, amount, metadata) == true then 
+                        return true 
+                    else
+                        return false 
+                    end 
                 else
-                    return false 
-                end
+                    if Player.canCarryItem(item, amount) then -- Weight check 
+                        Player.addInventoryItem(item, amount, metadata)
+                        return true 
+                    else
+                        return false 
+                    end
+                end 
             end 
 
             -- Has item function

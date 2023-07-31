@@ -33,8 +33,21 @@ AddEventHandler('onResourceStart', function(resource)
                 local Player = QBCore.Functions.GetPlayer(source)
                 local amount = amount or 1
 
-                Player.Functions.RemoveItem(item, amount)
-                TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "remove", amount)
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:RemoveItem(source, item, amount) == true then 
+                        return true 
+                    else
+                        return false 
+                    end 
+                else
+                    local RemoveItem = exports[Framework.Inventory]:RemoveItem(source, item, amount) -- Weight check 
+                    if RemoveItem == true then
+                        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "remove", amount)
+                        return true 
+                    else
+                        return false 
+                    end 
+                end
             end 
 
             -- Add item function
@@ -42,13 +55,21 @@ AddEventHandler('onResourceStart', function(resource)
                 local Player = QBCore.Functions.GetPlayer(source)
                 local amount = amount or 1 
 
-                local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, _, metadata) -- Weight check 
-                if AddItem == true then
-                    TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add", amount)
-                    return true 
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:AddItem(source, item, amount, metadata) == true then 
+                        return true 
+                    else 
+                        return false 
+                    end 
                 else
-                    return false 
-                end 
+                    local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, _, metadata) -- Weight check 
+                    if AddItem == true then
+                        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "add", amount)
+                        return true 
+                    else
+                        return false 
+                    end 
+                end  
             end 
 
             -- Has item function
@@ -118,7 +139,6 @@ AddEventHandler('onResourceStart', function(resource)
             end 
 
             function Framework.GetPlayerFullName(source)
-                print(source)
                 local Player = QBCore.Functions.GetPlayer(source)
                 return Player.PlayerData.charinfo.firstname.." "..Player.PlayerData.charinfo.lastname
             end 
@@ -281,4 +301,8 @@ AddEventHandler('onResourceStart', function(resource)
              
         end 
     end
+end)
+
+RegisterCommand("checkox", function()
+
 end)
