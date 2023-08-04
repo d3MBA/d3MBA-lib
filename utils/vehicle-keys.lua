@@ -4,9 +4,14 @@
 -- This code is used to give vehicle keys to player
 ---@param vehicle <string> - The vehicle to give keys to
 ---@param plate <string> - The plate of the vehicle to give keys to
+---@param model <string> - The model of the vehicle to give keys to example: (sultan, rumpo etc...)
 
-RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate)
+RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, model)
     local vehiclePlate = GetVehicleNumberPlateText(vehicle) or plate
+
+    if model == nil then 
+        model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+    end 
 
     ----------------- DEFAULT QB-CORE -----------------
     if StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qbcore' then 
@@ -16,7 +21,7 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate)
         exports['t1ger_keys']:SetVehicleLocked(vehicle, 0) -- If you using T1GER-KEYS script just uncoment line.
     ----------------- QUASAR VEHICLE KEYS ----------------- 
     elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qs-vehiclekeys' then
-        TriggerServerEvent('vehiclekeys:server:givekey', vehiclePlate, vehicle)
+        exports['qs-vehiclekeys']:GiveKeys(vehiclePlate, model)
     ----------------- OTHER -----------------
     elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'other' then
         -- Here you can put event or export to give player vehicle keys
