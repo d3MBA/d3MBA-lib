@@ -55,6 +55,12 @@ AddEventHandler('onResourceStart', function(resource)
                     else
                         return false 
                     end 
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    if exports['qs-inventory']:AddItem(source, item, amount, _, metadata) == true then 
+                        return true 
+                    else
+                        return false 
+                    end
                 else
                     if Player.canCarryItem(item, amount) then -- Weight check 
                         Player.addInventoryItem(item, amount, metadata)
