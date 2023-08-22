@@ -34,18 +34,13 @@ AddEventHandler('onResourceStart', function(resource)
                 local amount = amount or 1
 
                 if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
-                    if exports.ox_inventory:RemoveItem(source, item, amount) == true then 
-                        return true 
-                    else
-                        return false 
-                    end 
+                    exports.ox_inventory:RemoveItem(source, item, amount)
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    exports['qs-inventory']:RemoveItem(source, item, amount)
                 else
-                    local RemoveItem = exports[Framework.Inventory]:RemoveItem(source, item, amount) -- Weight check 
+                    local RemoveItem = exports[Framework.Inventory]:RemoveItem(source, item, amount)
                     if RemoveItem == true then
-                        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "remove", amount)
-                        return true 
-                    else
-                        return false 
+                        TriggerClientEvent('inventory:client:ItemBox', source, QBCore.Shared.Items[item], "remove", amount) 
                     end 
                 end
             end 
@@ -56,11 +51,9 @@ AddEventHandler('onResourceStart', function(resource)
                 local amount = amount or 1 
 
                 if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
-                    if exports.ox_inventory:AddItem(source, item, amount, metadata) == true then 
-                        return true 
-                    else 
-                        return false 
-                    end 
+                    exports.ox_inventory:AddItem(source, item, amount, metadata) 
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    exports['qs-inventory']:AddItem(source, item, amount, _, metadata)
                 else
                     local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, _, metadata) -- Weight check 
                     if AddItem == true then
@@ -70,6 +63,28 @@ AddEventHandler('onResourceStart', function(resource)
                         return false 
                     end 
                 end  
+            end 
+
+            -- Can carry item function
+            function Framework.CanCarryItem(source, item, amount)
+                local Player = QBCore.Functions.GetPlayer(source)
+                local amount = amount or 1 
+
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:CanCarryItem(source, item, amount) == true then 
+                        return true 
+                    else 
+                        return false 
+                    end
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    if exports['qs-inventory']:CanCarryItem(source, item, amount) == true then 
+                        return true 
+                    else 
+                        return false 
+                    end
+                else
+                    return true
+                end 
             end 
 
             -- Has item function
@@ -206,6 +221,19 @@ AddEventHandler('onResourceStart', function(resource)
                 -- If the source has the item in the specified amount, remove it
                 if Framework.HasItem(source, ItemName, Amount) == true then
                     Framework.RemoveItem(source, ItemName, Amount)
+                end
+            end)
+
+            -- Callback functon to check if a player can carry a specific item and a certain amount of it
+            -- @param source <string> - representing the source from which the call is originated
+            -- @param cb <function> - representing a callback function to be called after the operations
+            -- @param item <string> - representing the name of the item to be checked
+            -- @param amount <number> - representing the amount of the item to be checked
+            Framework.CreateCallback('d3MBA-lib:server:CanCarryItem', function(source, cb, item, amount)
+                if Framework.CanCarryItem(source, item, amount) == true then 
+                    cb(true)
+                else
+                    cb(false)
                 end
             end)
 

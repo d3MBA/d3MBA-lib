@@ -34,38 +34,49 @@ AddEventHandler('onResourceStart', function(resource)
                 local amount = amount or 1
 
                 if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
-                    if exports.ox_inventory:RemoveItem(source, item, amount) == true then 
-                        return true 
-                    else
-                        return false 
-                    end 
+                    exports.ox_inventory:RemoveItem(source, item, amount)
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    exports['qs-inventory']:RemoveItem(source, item, amount)
                 else
                     Player.removeInventoryItem(item, amount)
-                end 
+                end
             end 
 
             -- Add item function
             function Framework.AddItem(source, item, amount, metadata)
                 local Player = ESX.GetPlayerFromId(source)
                 local amount = amount or 1
-                
+
                 if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
-                    if exports.ox_inventory:AddItem(source, item, amount, metadata) == true then 
-                        return true 
-                    else
-                        return false 
-                    end 
+                    exports.ox_inventory:AddItem(source, item, amount, metadata) 
                 elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
-                    if exports['qs-inventory']:AddItem(source, item, amount, _, metadata) == true then 
+                    exports['qs-inventory']:AddItem(source, item, amount, _, metadata)
+                else
+                    Player.addInventoryItem(item, amount, metadata)
+                end  
+            end 
+
+            -- Can carry item function
+            function Framework.CanCarryItem(source, item, amount)
+                local Player = ESX.GetPlayerFromId(source)
+                local amount = amount or 1
+
+                if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+                    if exports.ox_inventory:CanCarryItem(source, item, amount) == true then 
                         return true 
-                    else
+                    else 
+                        return false 
+                    end
+                elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
+                    if exports['qs-inventory']:CanCarryItem(source, item, amount) == true then 
+                        return true 
+                    else 
                         return false 
                     end
                 else
-                    if Player.canCarryItem(item, amount) then -- Weight check 
-                        Player.addInventoryItem(item, amount, metadata)
+                    if Player.canCarryItem(item, amount) == true then 
                         return true 
-                    else
+                    else 
                         return false 
                     end
                 end 
@@ -223,6 +234,19 @@ AddEventHandler('onResourceStart', function(resource)
                 -- If the source has the item in the specified amount, remove it
                 if Framework.HasItem(source, ItemName, Amount) == true then
                     Framework.RemoveItem(source, ItemName, Amount)
+                end
+            end)
+
+            -- Callback functon to check if a player can carry a specific item and a certain amount of it
+            -- @param source <string> - representing the source from which the call is originated
+            -- @param cb <function> - representing a callback function to be called after the operations
+            -- @param item <string> - representing the name of the item to be checked
+            -- @param amount <number> - representing the amount of the item to be checked
+            Framework.CreateCallback('d3MBA-lib:server:CanCarryItem', function(source, cb, item, amount)
+                if Framework.CanCarryItem(source, item, amount) == true then 
+                    cb(true)
+                else
+                    cb(false)
                 end
             end)
 

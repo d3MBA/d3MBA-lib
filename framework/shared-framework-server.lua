@@ -116,7 +116,6 @@ function Framework.GetItemLabel(item)
                 print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
             end
         elseif Framework.Framework == 'qbcore' and Framework.SpecificItemLabels == false then
-            QBCore = exports[Framework.CoreObject]:GetCoreObject()
             if QBCore.Shared.Items[item] ~= nil then
                 ItemLabel = QBCore.Shared.Items[item].label
             else

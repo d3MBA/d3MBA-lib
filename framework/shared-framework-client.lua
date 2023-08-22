@@ -49,9 +49,6 @@ function Framework.TriggerServerCallback(name, ...)
 
     -- QB-CORE
     if Framework.Framework == "qbcore" then 
-        -- Get the QBCore object
-        QBCore = exports[Framework.CoreObject]:GetCoreObject()
-
         -- Trigger the callback
         QBCore.Functions.TriggerCallback(name, function(result)
             p:resolve(result)
@@ -85,7 +82,6 @@ function Framework.GetItemLabel(item)
                 print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
             end
         elseif Framework.Framework == 'qbcore' and Framework.SpecificItemLabels == false then
-            QBCore = exports[Framework.CoreObject]:GetCoreObject()
             if QBCore.Shared.Items[item] ~= nil then
                 ItemLabel = QBCore.Shared.Items[item].label
             else
