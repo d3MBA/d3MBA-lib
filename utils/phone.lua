@@ -28,6 +28,15 @@ RegisterNetEvent('d3MBA-lib:client:SendPhoneNotification', function(title, text,
                 icon = icon,
                 timeout = timeout
             })
+        --------------------------- GKS-PHONE ---------------------------
+        elseif StringTrim(Framework.PhoneScript) == "gksphone" then
+            local NotifData = {
+                title = title, 
+                message = text, 
+                img= '/html/static/img/icons/messages.png',
+                duration = timeout
+            }
+            exports["gksphone"]:SendNotification(NotifData)
         --------------------------- OTHER ---------------------------
         elseif StringTrim(Framework.PhoneScript) == "other" then
             -- Add your notification event or export here 
@@ -66,6 +75,16 @@ RegisterNetEvent('d3MBA-lib:client:SendPhoneMail', function(sender, subject, mes
                 message = message,
                 button = button
             })
+        --------------------------- GKS-PHONE ---------------------------
+        elseif StringTrim(Framework.PhoneScript) == "gksphone" then
+            local MailData = {
+                sender = sender,
+                image = '/html/static/img/icons/mail.png',
+                subject = subject,
+                message = message,
+                button = button
+            }
+            exports["gksphone"]:SendNewMail(MailData)
         --------------------------- OTHER ---------------------------
         elseif StringTrim(Framework.PhoneScript) == "other" then
             -- Add your notification event or export here 
