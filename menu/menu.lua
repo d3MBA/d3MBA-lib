@@ -12,7 +12,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                 disabled = menuHeaderOptions.disabled or false,
                 header = menuHeaderOptions.title,
                 txt = menuHeaderOptions.context,
-                icon = menuHeaderOptions.icon or nil,
+                -- icon = menuHeaderOptions.icon or nil,
 
                 params = {
                     isServer = menuHeaderOptions.isServer or false,
@@ -62,7 +62,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                 table.insert(menu, {
                     header = v.title,
                     txt = v.context,
-                    icon = v.icon or nil, 
+                    -- icon = v.icon or nil, 
                     disabled = v.disabled or false,
                     params = {
                         isServer = v.isServer or false,
@@ -74,7 +74,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                     table.insert(menu, {
                         header = v.image .. " " .. v.title,
                         txt = v.context,
-                        icon = v.icon or nil, 
+                        -- icon = v.icon or nil, 
                         disabled = v.disabled or false,
                         params = {
                             isServer = v.isServer or false,
@@ -129,7 +129,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                     disabled = menuFooterOptions.disabled or false,
                     header = menuFooterOptions.title,
                     txt = menuFooterOptions.context,
-                    icon = menuFooterOptions.icon or nil, 
+                    -- icon = menuFooterOptions.icon or nil, 
                     
                     params = {
                         isServer = menuFooterOptions.isServer or false,
@@ -142,7 +142,7 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
                     disabled = menuFooterOptions.disabled or false,
                     header = menuFooterOptions.title,
                     txt = menuFooterOptions.context,
-                    icon = menuFooterOptions.icon or nil, 
+                    -- icon = menuFooterOptions.icon or nil, 
                     
                     params = {
                         exports['qb-menu']:closeMenu(menu)
