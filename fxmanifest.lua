@@ -20,12 +20,14 @@ shared_scripts {
 
 server_scripts {
     'config.lua',
+    -- Resource checker & starter
     'resource-checker.lua', 
     'resource-starter.lua',
     -- Database 
     '@mysql-async/lib/MySQL.lua',
     'database/db-bridge.lua',
     -- Framework
+    'framework-starter.lua',
     'framework/QBCORE/server-qbcore.lua',
     'framework/ESX/server-esx.lua',
     'framework/shared-framework-server.lua',
@@ -38,7 +40,7 @@ server_scripts {
 }
 
 client_scripts {
-    'config.lua', -- Config file for the library 
+    'config.lua', -- Config file for the library
     -- Script
     'framework/shared-framework-client.lua',
     'menu/*.lua',

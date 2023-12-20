@@ -51,9 +51,9 @@ AddEventHandler('onResourceStart', function(resource)
                 local amount = amount or 1 
 
                 if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
-                    exports.ox_inventory:AddItem(source, item, amount, metadata) 
+                    return exports.ox_inventory:AddItem(source, item, amount, metadata) 
                 elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
-                    exports['qs-inventory']:AddItem(source, item, amount, _, metadata)
+                    return exports['qs-inventory']:AddItem(source, item, amount, _, metadata)
                 else
                     local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, _, metadata) -- Weight check 
                     if AddItem == true then
@@ -89,19 +89,27 @@ AddEventHandler('onResourceStart', function(resource)
 
             -- Has item function
             function Framework.HasItem(source, item, amount)
-                local Player = QBCore.Functions.GetPlayer(source)
-                local item = Player.Functions.GetItemByName(item)
                 local amount = amount or 1
 
-                if item ~= nil then
-                    if item.amount >= amount then 
+                if StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then 
+                    if exports['qs-inventory']:GetItemTotalAmount(source, item) >= amount then 
                         return true 
-                    else
+                    else 
                         return false 
-                    end 
+                    end
                 else
-                    return false
-                end 
+                    local Player = QBCore.Functions.GetPlayer(source)
+                    local item = Player.Functions.GetItemByName(item)
+                    if item ~= nil then
+                        if item.amount >= amount then 
+                            return true 
+                        else
+                            return false 
+                        end 
+                    else
+                        return false
+                    end
+                end  
             end 
 
             -- Get money 
@@ -145,7 +153,11 @@ AddEventHandler('onResourceStart', function(resource)
 
             -- Create useable item 
             function Framework.CreateUseableItem(item, cb)
-                QBCore.Functions.CreateUseableItem(item, cb) 
+                if StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then 
+                    exports['qs-inventory']:CreateUsableItem(item, cb)
+                else
+                    QBCore.Functions.CreateUseableItem(item, cb)
+                end
             end 
     
             function Framework.GetPlayerName(source)

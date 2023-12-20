@@ -7,12 +7,6 @@
 ---@param slots <number> - The number of slots in the stash
 ---@param weight <number> - The maximum weight that can be stored in the stash
 
-CreateThread(function() 
-    if StringTrim(string.lower(Framework.Target)) == "ox_target" then 
-        Framework.Target = "qtarget"
-    end 
-end)
-
 function Framework.OpenStash(stashName, slots, weight) 
     ----------------- QB-INVENTORY -----------------
     if StringTrim(string.lower(Framework.Inventory)) == 'qb-inventory' then
@@ -68,6 +62,16 @@ end
 -- Returns the label for a given item
 --- @param item <string> - The item to get the label for
 
+local oxItemLabels = {}
+
+CreateThread(function() 
+    if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then 
+        for item, data in pairs(exports.ox_inventory:Items()) do
+            oxItemLabels[item] = data.label
+        end
+    end
+end)
+
 function Framework.GetItemLabel(item)
     local WarningMsg = "^1---------------- WARNING ----------------\n^3Framework.GetItemLabel: Item - (%s) not found in %s\n^1---------------- WARNING ----------------"
     local ItemLabelsFile = "d3MBA-lib/item-labels/labels.lua"
@@ -75,24 +79,28 @@ function Framework.GetItemLabel(item)
     if item == nil or item == ' ' or item == '' then
         print(string.format(WarningMsg, "No item given"))
     else
-        if Framework.SpecificItemLabels == true or Framework.Framework == 'esx' then
-            if ItemLabels[item] ~= nil then
-                ItemLabel = ItemLabels[item] 
-            else
+        if Framework.SpecificItemLabels == true or StringTrim(string.lower(Framework.Framework)) == 'esx' and StringTrim(string.lower(Framework.Inventory)) ~= 'ox_inventory' then
+            ItemLabel = ItemLabels[item] or ItemLabel
+            if ItemLabel == "ITEM LABEL NOT FOUND" then
                 print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
             end
-        elseif Framework.Framework == 'qbcore' and Framework.SpecificItemLabels == false then
-            if QBCore.Shared.Items[item] ~= nil then
-                ItemLabel = QBCore.Shared.Items[item].label
-            else
+        elseif StringTrim(string.lower(Framework.Framework)) == 'qbcore' and StringTrim(string.lower(Framework.Inventory)) ~= 'ox_inventory' then
+            ItemLabel = QBCore.Shared.Items[item] and QBCore.Shared.Items[item].label or ItemLabel
+            if ItemLabel == "ITEM LABEL NOT FOUND" then
                 ItemLabelsFile = "QBCore.Shared.Items"
+                print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
+            end
+        elseif StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
+            ItemLabel = oxItemLabels[item] or ItemLabel
+            if ItemLabel == "ITEM LABEL NOT FOUND" then
+                ItemLabelsFile = "ox_inventory/data/items.lua"
                 print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
             end
         end
     end 
     return ItemLabel 
 end
-
+ 
 -- Delete object by net id 
 ---@param netId <number> - The net id of the object to delete
 RegisterNetEvent('d3MBA-lib:client:DeleteObjectByNetId', function(netId)
@@ -182,3 +190,9 @@ function Framework.TurnPlayerToFaceEntity(playerCoords, entityCoords)
     SetEntityCoordsNoOffset(PlayerPedId(), playerCoords.x, playerCoords.y, playerCoords.z, true, true, true)
     SetEntityHeading(PlayerPedId(), playerHeading)
 end
+
+-- Get item inventory img 
+-- @param item <string> - The name of the item to get the inventory image for 
+function Framework.GetItemImg(item)
+    return 'nui://' ..Framework.InventoryImgPath[Framework.Inventory] ..item.. '.png'
+end 

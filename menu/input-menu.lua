@@ -35,7 +35,7 @@ function Framework.OpenInputMenu(inputType, header, inputs)
         end
         return lib.inputDialog(header, oxInputs)
 
-    elseif inputType == "qb-input" then
+    elseif inputType == "qb-input" then  
         local qbInputs = {}
         for _, v in ipairs(inputs) do
             table.insert(qbInputs, {
