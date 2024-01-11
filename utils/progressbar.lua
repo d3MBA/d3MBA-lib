@@ -15,11 +15,7 @@ function Framework.ProgressBar(name, label, duration, controls)
             disableCarMovement = controls.carMovement,
             disableMouse = controls.mouse,
             disableCombat = controls.combat,   
-        }, {
-            animDict = "",
-            anim = "",
-            flags = "",
-        }, {}, {}, function()
+        }, {}, {}, {}, function()
         end)
         Wait(duration * 1000) -- ⚠️ IN SOME PROGRESS BARS, THE WAIT FUNCTION IS NOT REQUIRED, IN THIS CASE, PLEASE COMMENT WAIT FUNCTION!
         return true 
