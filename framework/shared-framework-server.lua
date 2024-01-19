@@ -23,25 +23,28 @@ end
 
  
 -- Gets the identifiers for a given player
----@param source <number> -  The player to get the identifiers for (ID)
+---@param src <number> -  The player to get the identifiers for (ID)
 
 function Framework.GetPlayerIdentifiers(source)
+    local src = tonumber(source)
+    if src == 0 or src == nil then print("Framework.GetPlayerIdentifiers: No source specified: ("..src..")") return end
+
     local identifier = nil
 
     ----------------- LICENSE -----------------
     if StringTrim(string.lower(Framework.LicenseType)) == 'license' then
-        identifier = GetPlayerIdentifier(source, 1)
+        identifier = GetPlayerIdentifier(src, 1)
     ----------------- STEAM -----------------
     elseif StringTrim(string.lower(Framework.LicenseType)) == 'steam' then
-        identifier = GetPlayerIdentifier(source, 0)
+        identifier = GetPlayerIdentifier(src, 0)
     ----------------- CID -----------------
     elseif StringTrim(string.lower(Framework.LicenseType)) == 'cid' then -- Only for QBCORE framework
         if Framework.Framework == 'qbcore' then 
-            local Player = QBCore.Functions.GetPlayer(source)
+            local Player = QBCore.Functions.GetPlayer(src)
             local cid = Player.PlayerData.citizenid
             return cid
         elseif Framework.Framework == 'esx' then 
-            local PlayerInfo = GetPlayerInfo(source)
+            local PlayerInfo = GetPlayerInfo(src)
             return PlayerInfo.char_identifier
         end 
     end
@@ -53,9 +56,23 @@ function Framework.GetPlayerIdentifiers(source)
     return identifier -- return player identifier 
 end
 
+
+-- Returns the player server id from the identifier
+---@param identifier <string> - The identifier to get the player server id for
+function Framework.GetPlayerIdFromIdentifier(identifier)
+    for _, playerId in ipairs(GetPlayers()) do
+        if Framework.GetPlayerIdentifiers(playerId) == identifier then 
+            return playerId
+        end 
+    end
+end
+
+
 -- Check if player is admin 
 ---@param source <number> -  The player to check (ID)
 function Framework.IsPlayerAdmin(source)
+    if source == 0 or source == nil then print("Framework.IsPlayerAdmin: No source specified: ("..source..")") return end
+
     for k, v in pairs(Framework.AcePermissions) do
         if IsPlayerAceAllowed(source, v) then
             return true
@@ -138,6 +155,7 @@ end
 -- Delete object by net id 
 ---@param netId <number> - The net id of the object to delete
 RegisterNetEvent('d3MBA-lib:server:DeleteObjectByNetId', function(netId)
+    if netId == 0 or netId == nil then print("d3MBA-lib:server:DeleteObjectByNetId: No netId specified: ("..netId..")") return end 
     -- Trigger the client event for all connected clients
     TriggerClientEvent('d3MBA-lib:client:DeleteObjectByNetId', -1, netId)
 end)
