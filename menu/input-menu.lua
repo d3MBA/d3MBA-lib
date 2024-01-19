@@ -31,6 +31,14 @@ function Framework.OpenInputMenu(inputType, header, inputs)
                     label = v.label,
                     options = options,
                 })
+            elseif v.type == "slider" then
+                table.insert(oxInputs, {
+                    type = 'slider',
+                    label = v.label,
+                    min = v.min or 1,
+                    max = v.max or 100,
+                    default = v.default or 1,
+                })
             end
         end
         return lib.inputDialog(header, oxInputs)
