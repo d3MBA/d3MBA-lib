@@ -107,6 +107,21 @@ AddEventHandler('onResourceStart', function(resource)
                 end 
             end 
 
+            -- Get total amount of item
+            function Framework.GetItemTotalAmount(source, item) 
+                if StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then 
+                    return exports['qs-inventory']:GetItemTotalAmount(source, item)
+                else
+                    local Player = ESX.GetPlayerFromId(source)
+                    local item = Player.getInventoryItem(item)
+                    if item ~= nil then
+                        return item.count
+                    else
+                        return 0
+                    end  
+                end 
+            end
+
             -- Get money 
             function Framework.GetMoney(source, account, amount)
                 if account == "cash" then account = "money" end 
@@ -260,6 +275,25 @@ AddEventHandler('onResourceStart', function(resource)
                 else
                     cb(false)
                 end
+            end)
+
+            -- Callback function to check if a player has a specific item and a certain amount of it
+            --- @param source <string> - representing the source from which the call is originated
+            --- @param cb <function> - representing a callback function to be called after the operations
+            --- @param item <string> - representing the name of the item to be checked
+            Framework.CreateCallback('d3MBA-lib:server:GetItemTotalAmount', function(source, cb, item)
+                local Warning = function(msg) 
+                    local warningMsg = "^1---------------- WARNING ----------------\n^3Callback:d3MBA-lib:server:GetItemTotalAmount: %s is nil\n^1---------------- WARNING ----------------"
+                    print(string.format(warningMsg, msg))
+                    cb(string.format(warningMsg, msg))
+                end
+
+                if item == nil then
+                    Warning("Item")
+                    return
+                end
+                
+                cb(Framework.GetItemTotalAmount(source, item))
             end)
 
             -- Callback function to check if a player has a specific item and a certain amount of it

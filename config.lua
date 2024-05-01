@@ -24,12 +24,14 @@ Framework.Inventory = '' -- [ 'qb-inventory' / 'ps-inventory' / 'lj-inventory' /
 Framework.LicenseType = '' -- [ 'license' / 'steam' / 'cid' = (QBCORE = Citizen ID, ESX = Multicharacter identifier) ]
 Framework.LicenseWithoutPrefix = true -- Remove [ license: / steam: ] Prefix from license
 
-Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ox_target = 'qb-target' ] Set the target script name
+-- ⚠️IF YOU'RE USING OX_TARGET SET Framework.Target = "qtarget"⚠️
+Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ox_target = 'qtarget' ] Set the target script name
+
 Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] Set the menu
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
 Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'cdn-fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
-Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
+Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
 
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'gksphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications

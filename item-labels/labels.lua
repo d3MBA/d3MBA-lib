@@ -2,5 +2,6 @@
 
 ItemLabels = {
     -- Paste your labels here 
+    -- (ALL ITEM LABELS CAN BE FOUND IN THE d3MBA-SCRIPT_NAME/README/item-labels.lua file!) 
     
 }

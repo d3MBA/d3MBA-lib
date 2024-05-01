@@ -22,6 +22,10 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, mo
     ----------------- QUASAR VEHICLE KEYS ----------------- 
     elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qs-vehiclekeys' then
         exports['qs-vehiclekeys']:GiveKeys(vehiclePlate, model)
+    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'jaksam' then
+        TriggerServerEvent("vehicles_keys:selfGiveVehicleKeys", vehiclePlate)
+    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'renewed' then
+        exports['Renewed-Vehiclekeys']:addKey(vehiclePlate)
     ----------------- OTHER -----------------
     elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'other' then
         -- Here you can put event or export to give player vehicle keys

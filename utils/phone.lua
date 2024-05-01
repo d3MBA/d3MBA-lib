@@ -37,6 +37,12 @@ RegisterNetEvent('d3MBA-lib:client:SendPhoneNotification', function(title, text,
                 duration = timeout
             }
             exports["gksphone"]:SendNotification(NotifData)
+        --------------------------------- LB-PHONE ---------------------------
+        elseif StringTrim(Framework.PhoneScript) == "lb-phone" then
+            exports["lb-phone"]:SendNotification({
+                title = title, 
+                content = text, 
+            })
         --------------------------- OTHER ---------------------------
         elseif StringTrim(Framework.PhoneScript) == "other" then
             -- Add your notification event or export here 
@@ -85,6 +91,9 @@ RegisterNetEvent('d3MBA-lib:client:SendPhoneMail', function(sender, subject, mes
                 button = button
             }
             exports["gksphone"]:SendNewMail(MailData)
+        --------------------------------- LB-PHONE ---------------------------
+        elseif StringTrim(Framework.PhoneScript) == "lb-phone" then
+            print("lb-phone mail export called")
         --------------------------- OTHER ---------------------------
         elseif StringTrim(Framework.PhoneScript) == "other" then
             -- Add your notification event or export here 

@@ -159,3 +159,14 @@ RegisterNetEvent('d3MBA-lib:server:DeleteObjectByNetId', function(netId)
     -- Trigger the client event for all connected clients
     TriggerClientEvent('d3MBA-lib:client:DeleteObjectByNetId', -1, netId)
 end)
+
+-- Get the current UTC time as a timestamp
+function Framework.GetCurrentTime()
+    return os.time(os.date("!*t"))
+end
+
+-- Format time from a timestamp
+---@param timestamp <number> - The timestamp to format
+function Framework.FormatTime(timestamp) 
+    return os.date('%Y-%m-%d %H:%M:%S', timestamp)
+end

@@ -24,6 +24,25 @@ CreateThread(function()
             return ESX.Game.GetVehicleProperties(vehicle)  
         end 
 
+        function Framework.ChangeClothes(clothes, onduty) 
+            print(json.encode(clothes))
+            print(clothes, onduty)
+            if onduty == false then -- Change player clothes to job clothes 
+                ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+                    if skin.sex == 0 then 
+                        TriggerEvent('skinchanger:loadClothes', skin, clothes["male"])
+                    else
+                        TriggerEvent('skinchanger:loadClothes', skin, clothes["female"])
+                    end 
+                end)
+            else -- Reset player clothes 
+                ESX.TriggerServerCallback('esx_skin:getPlayerSkin', function(skin, jobSkin)
+                    TriggerEvent('skinchanger:loadSkin', skin)
+                    TriggerEvent('esx:restoreLoadout')
+                end)
+            end
+        end
+
         -- On player loaded event 
         RegisterNetEvent('esx:playerLoaded', function()
             TriggerEvent('d3MBA-lib:client:OnPlayerLoaded')

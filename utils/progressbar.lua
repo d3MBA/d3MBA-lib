@@ -50,6 +50,7 @@ function Framework.ProgressBar(name, label, duration, controls)
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib_circle' then  
         lib.progressCircle({
             duration = duration * 1000,
+            label = label,
             position = 'bottom',
             useWhileDead = false,
             canCancel = false,
