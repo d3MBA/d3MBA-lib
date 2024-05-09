@@ -204,3 +204,14 @@ RegisterNetEvent("d3MBA-lib:client:OpenMenu", function(menuType, menuHeaderOptio
         lib.showContext('universalMenu')
     end
 end) 
+
+-- Close menu event
+RegisterNetEvent("d3MBA-lib:client:CloseMenu", function()
+    if Framework.Menu == "qb-menu" then
+        exports['qb-menu']:closeMenu()
+    elseif Framework.Menu == "nh-context" then
+        TriggerEvent('nh-context:closeMenu')
+    elseif Framework.Menu == "ox_lib" then
+        lib.hideContext('universalMenu')
+    end
+end)
