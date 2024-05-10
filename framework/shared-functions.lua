@@ -24,3 +24,16 @@ end
 function Framework.Random(min, max)   
     return math.random(min, max)
 end
+
+
+-- Format price with commas
+---@param price number - The price to format
+function Framework.FormatPrice(price)
+    local strAmount = tostring(price)  -- Convert number to string for formatting
+    local reversed = strAmount:reverse()
+    local formatted = reversed:gsub("(%d%d%d)", "%1,")  -- Add commas
+
+    local result = formatted:reverse():gsub("^,", "") 
+    
+    return result -- return formatted price
+end
