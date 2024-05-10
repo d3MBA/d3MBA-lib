@@ -62,7 +62,7 @@ end
 function Framework.GetPlayerIdFromIdentifier(identifier)
     for _, playerId in ipairs(GetPlayers()) do
         if Framework.GetPlayerIdentifiers(playerId) == identifier then 
-            return playerId
+            return tonumber(playerId)
         end 
     end
 end
@@ -170,3 +170,23 @@ end
 function Framework.FormatTime(timestamp) 
     return os.date('%Y-%m-%d %H:%M:%S', timestamp)
 end
+
+-- Check if a player is online
+---@param source <number> - The player to check
+function Framework.IsPlayerOnline(source)
+    if source == 0 or source == nil then print("Framework.IsPlayerOnline: No source specified: ("..source..")") end
+    return GetPlayerName(source) ~= nil
+end
+
+-- Check if a player is nearby
+---@param source <number> - The player to check
+---@param coords <vector3> - The coordinates to check
+---@param distance <number> - The distance to check
+function Framework.IsPlayerNearby(source, coords, distance)
+    if source == 0 or source == nil then print("Framework.IsPlayerNearby: No source specified: ("..source..")") return end
+    if coords == nil or coords == ' ' or coords == '' then print("Framework.IsPlayerNearby: No coords specified: ("..coords..")") return end
+    if distance == nil or distance == ' ' or distance == '' then print("Framework.IsPlayerNearby: No distance specified: ("..distance..")") return end
+    local playerCoords = GetEntityCoords(GetPlayerPed(source))
+    return #(playerCoords - coords) < distance
+end
+
