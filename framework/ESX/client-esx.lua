@@ -8,7 +8,7 @@ CreateThread(function()
         function Framework.CheckJob(source, job)
             if job == nil then return false end 
 
-            if QBCore.Functions.GetPlayerData().job.name == job then 
+            if ESX.PlayerData.job.name == job then 
                 return true 
             else
                 return false 
