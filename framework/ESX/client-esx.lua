@@ -5,7 +5,12 @@ CreateThread(function()
     if CheckFramework() == 'esx' then
         ESX = exports["es_extended"]:getSharedObject()
 
-        function Framework.CheckJob(source, job)
+
+        function Framework.GetPlayerJob()
+            return ESX.PlayerData.job.name, ESX.PlayerData.job.grade, ESX.PlayerData.job.label
+        end
+
+        function Framework.CheckJob(job)
             if job == nil then return false end 
 
             if ESX.PlayerData.job.name == job then 
@@ -16,7 +21,7 @@ CreateThread(function()
         end 
         
         -- Check player job duty 
-        function Framework.CheckJobDuty(source)            
+        function Framework.CheckJobDuty()            
             return true 
         end
 
