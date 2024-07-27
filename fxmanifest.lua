@@ -27,14 +27,13 @@ server_scripts {
     '@mysql-async/lib/MySQL.lua',
     'database/db-bridge.lua',
     -- Framework
-    'framework-starter.lua',
     'framework/QBCORE/server-qbcore.lua',
     'framework/ESX/server-esx.lua',
     'framework/shared-framework-server.lua',
     'framework/shared-functions.lua',
     -- Script functions 
     'script-functions/scripts-config.lua',
-    'script-functions/server/*.lua',
+    -- 'script-functions/server/*.lua',
     -- Version checker
     'version-check.lua',
 }
