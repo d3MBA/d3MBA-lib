@@ -244,3 +244,22 @@ function Framework.GetItemImg(item)
 
     return 'nui://' ..Framework.InventoryImgPath[Framework.Inventory] ..item.. '.png'
 end 
+
+
+function Framework.FadeOutAndDeleteEntity(entity, duration)
+    if entity == nil or entity == 0 then print("Framework.FadeOutAndDeleteEntity: No entity specified: ("..entity..")") return end -- no entity specified
+    if duration == 0 or duration == nil then duration = 10 end
+    if DoesEntityExist(entity) then
+        local alpha = 255
+        local decrement = 255 / duration
+
+        Citizen.CreateThread(function()
+            while alpha > 0 do
+                Citizen.Wait(50)
+                alpha = alpha - decrement
+                SetEntityAlpha(entity, math.floor(alpha), false)
+            end
+            DeleteEntity(entity)
+        end)
+    end
+end
