@@ -246,6 +246,32 @@ function Framework.GetItemImg(item)
 end 
 
 
+
+-- FadeInEntity
+-- @param entity <number> - The entity to fade in
+-- @param duration <number> - The duration of the fade in
+function Framework.FadeInEntity(entity, duration)
+    if entity == nil or entity == 0 then print("Framework.FadeInEntity: No entity specified: ("..entity..")") return end -- no entity specified
+    if duration == 0 or duration == nil then duration = 10 end
+    SetEntityAlpha(entity, 0, false)
+    if DoesEntityExist(entity) then
+        local alpha = 0
+        local increment = 255 / duration
+
+        Citizen.CreateThread(function()
+            while alpha < 255 do
+                Citizen.Wait(50)
+                alpha = alpha + increment
+                SetEntityAlpha(entity, math.floor(alpha), false)
+            end
+        end)
+    end
+end
+
+
+-- FadeOutAndDeleteEntity
+-- @param entity <number> - The entity to fade out and delete
+-- @param duration <number> - The duration of the fade out
 function Framework.FadeOutAndDeleteEntity(entity, duration)
     if entity == nil or entity == 0 then print("Framework.FadeOutAndDeleteEntity: No entity specified: ("..entity..")") return end -- no entity specified
     if duration == 0 or duration == nil then duration = 10 end
