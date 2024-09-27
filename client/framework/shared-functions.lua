@@ -234,6 +234,7 @@ function Framework.TurnPlayerToFaceEntity(playerCoords, entityCoords)
     
     SetEntityCoordsNoOffset(PlayerPedId(), playerCoords.x, playerCoords.y, playerCoords.z, true, true, true)
     SetEntityHeading(PlayerPedId(), playerHeading)
+    return true
 end
 
 -- Get item inventory img 

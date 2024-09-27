@@ -1,18 +1,10 @@
--- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
-Framework = {}
+Framework = {} -- ⚠️DO NOT MODIFY THIS!!!⚠️
+Framework.Resources = {} -- ⚠️DO NOT MODIFY THIS!!!⚠️
+
 
 Framework.CheckEmptyConfigValues = true -- [ true / false ] Set true if you want to check empty config values (print in console)  
- 
-Framework.AddResourecesManually = false -- [ true / false ] Set true if you want to add resources manually 
--- If is true you need to add resources in Framework.Resources table to work properly.  
--- Example: Framework.Resources = { 'd3MBA-vendingmachines', 'd3MBA-tailorjob'}
-
--- If is false you don't need to add resources in Framework.Resources table to work properly (it will be added automatically) 
--- all resources that start with d3MBA- will be added to Framework.Resources table  
-
-Framework.Resources = {} -- Add resources manually here if Framework.AddResourecesManually is true
 
 Framework.Database = '' -- [ 'mysql-async' / 'oxmysql' / 'ghmattimysql' ] Choose your SQL
 Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework
@@ -25,18 +17,20 @@ Framework.LicenseType = '' -- [ 'license' / 'steam' / 'cid' = (QBCORE = Citizen 
 Framework.LicenseWithoutPrefix = true -- Remove [ license: / steam: ] Prefix from license
 
 -- ⚠️IF YOU'RE USING OX_TARGET SET Framework.Target = "qtarget"⚠️
-Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ox_target = 'qtarget' ] Set the target script name
+Framework.Target = '' -- [ 'qb-target' / 'qtarget' / ⚠️IF YOU'RE USING OX_TARGET SET Framework.Target = "qtarget"⚠️ ] Set the target script name
 
 Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] Set the menu
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
 Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'cdn-fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
-Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
+Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'cd-garage' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
 
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'gksphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications
 
 Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'ox_lib_circle' / 'mythic' / 'other' ] Set the progressbar script
+
+Framework.Cloathing = '' -- codem-appearance / tgiann-clothing / esx_skin / fivem-appearance / illenium-appearance / ox_appearance / qb-clothing
 
 Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'ox_lib' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {

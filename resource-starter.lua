@@ -4,8 +4,8 @@
 AddEventHandler('onResourceStart', function(resource)
     if resource == GetCurrentResourceName() then
       -- Start dependent script after library has loaded
-      Wait(1500)
-      StartResources(Framework.Resources) 
+        Wait(500)
+        StartResources(Framework.Resources) 
 
       if Framework.CheckEmptyConfigValues == true then
         CheckEmptyConfigValues() -- Check if any config values are empty or nil
@@ -18,9 +18,9 @@ end)
 function StartResources(resources) 
     for i, resource in ipairs(resources) do
         StopResource(resource)
-        Wait(250) 
+        Wait(200) 
         StartResource(resource)
-        Wait(500) -- Wait for 0.5 seconds between starting each script
+        Wait(200) -- Wait for 0.5 seconds between starting each script
     end
 end
 

@@ -1,8 +1,6 @@
 -- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
-Framework = Framework or {}
-
 -- Trim spaces from the beginning and end of a string
 function StringTrim(string)
     string = string:gsub("%s+", "")
@@ -42,7 +40,4 @@ function CheckFramework()
     end
 end
 
-exports('GetFrameworkObject', function()
-    return Framework
-end)
 
