@@ -42,6 +42,7 @@ function Framework.GetPlayerIdentifiers(source)
         if Framework.Framework == 'qbcore' then 
             local Player = QBCore.Functions.GetPlayer(src)
             if not Player then
+                print("^1---------------- WARNING ----------------\n^3Framework.GetPlayerIdentifiers: Player is nil\n^1---------------- WARNING ----------------")
                 return nil -- Avoid proceeding if Player is nil
             end
             local cid = Player.PlayerData.citizenid
