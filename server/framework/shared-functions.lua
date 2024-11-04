@@ -41,6 +41,9 @@ function Framework.GetPlayerIdentifiers(source)
     elseif StringTrim(string.lower(Framework.LicenseType)) == 'cid' then -- Only for QBCORE framework
         if Framework.Framework == 'qbcore' then 
             local Player = QBCore.Functions.GetPlayer(src)
+            if not Player then
+                return nil -- Avoid proceeding if Player is nil
+            end
             local cid = Player.PlayerData.citizenid
             return cid
         elseif Framework.Framework == 'esx' then 
