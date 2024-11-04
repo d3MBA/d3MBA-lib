@@ -20,7 +20,7 @@ shared_scripts {
 
 server_scripts {
     'config/config.lua',
-    'config/scripts-config.lua',
+    'config/scripts-config.lua', -- scripts config file
     '@mysql-async/lib/MySQL.lua',
     'server/load-module.lua', 
     -- Resource checker & starter
