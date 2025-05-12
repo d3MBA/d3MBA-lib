@@ -91,6 +91,7 @@ function Framework.GetItemLabel(item)
             if ItemLabel == "ITEM LABEL NOT FOUND" then
                 ItemLabelsFile = "QBCore.Shared.Items"
                 print(string.format(WarningMsg, tostring(item), ItemLabelsFile))
+                
             end
         elseif StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
             ItemLabel = oxItemLabels[item] or ItemLabel
@@ -132,17 +133,60 @@ function Framework.GetClosestEntityOfProp(propName, distance)
     return entity -- return the entity id of the closest entity
 end
 
+--- Draw a debug marker for the given coords + radius, lasting 'timeMs' milliseconds
+---@param coords vector3
+---@param radius number
+---@param timeMs number
+function DebugMarkerForRadius(coords, radius, timeMs)
+    CreateThread(function()
+        local endTime = GetGameTimer() + timeMs
+        while GetGameTimer() < endTime do
+            Wait(0)
+            -- markerType = 28 -> Circle marker on the ground
+            -- For a "sphere" style, you could try markerType = 1 or 25, etc.
+            DrawMarker(
+                28,                      -- markerType
+                coords.x, coords.y, coords.z, -- position
+                0.0, 0.0, 0.0,          -- direction vector (unused)
+                0.0, 0.0, 0.0,          -- rotation
+                radius * 2.0,           -- scaleX (diameter)
+                radius * 2.0,           -- scaleY (diameter)
+                radius * 2.0,           -- scaleZ (diameter)
+                255, 0, 0, 120,         -- RGBA color
+                false,                  -- bobUpAndDown
+                false,                  -- faceCamera
+                2,                      -- p19
+                true,                   -- rotate
+                nil, nil, false         -- texture dict/name + drawOnEnts
+            )
+        end
+    end)
+end
+
+
 -- Get nearby players
 ---@param coords <vector3> - The coords to check for nearby players
 ---@param radius <number> - The radius to check for nearby players
 ---@param ignoreSource <boolean> - Whether or not to ignore the source player 
-function Framework.GetNearbyPlayers(coords, radius, ignoreSource)
-    if coords == nil then print("Framework.GetNearbyPlayers: No coords specified: ("..coords..")") return end -- no coords specified
-    if radius == nil or radius <= 0 then print("Framework.GetNearbyPlayers: No radius specified: ("..radius..")") return end -- no radius specified
+function Framework.GetNearbyPlayers(coords, radius, ignoreSource, debug)
+    if coords == nil then
+        print("Framework.GetNearbyPlayers: No coords specified: ("..coords..")")
+        return
+    end
+
+    if radius == nil or radius <= 0 then
+        print("Framework.GetNearbyPlayers: No radius specified: ("..radius..")")
+        return
+    end
 
     local ignoreSource = ignoreSource or false
     local player = PlayerId()
     local nearbyPlayers = {}
+
+    -- If debug, show the marker for 5 seconds
+    if debug then
+        DebugMarkerForRadius(coords, radius, 5000)  -- 5 seconds
+    end
 
     local activePlayers = GetActivePlayers()
     local activePlayersCount = #activePlayers
@@ -154,8 +198,8 @@ function Framework.GetNearbyPlayers(coords, radius, ignoreSource)
         local distance = #(coords - otherPlayerCoords)
 
         if distance <= radius then
-            if otherPlayer == player and ignoreSource == true then
-                -- ignore the player who called the function
+            if otherPlayer == player and ignoreSource then
+                -- ignore the local player if ignoreSource==true
             else
                 local otherPlayerServerId = GetPlayerServerId(otherPlayer)
                 table.insert(nearbyPlayers, otherPlayerServerId)
@@ -165,6 +209,7 @@ function Framework.GetNearbyPlayers(coords, radius, ignoreSource)
 
     return nearbyPlayers
 end
+
 
 -- Check if any player is nearby
 ---@param coords <vector3> - The coordinates to check for nearby players
