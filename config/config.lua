@@ -39,6 +39,12 @@ Framework.NotificationsSettings = {
     Success = 'success',    
 }
 
+Framework.BlackMoney = {
+    Mode = '', -- [ 'item' / 'account' ] Choose if black money is handled as an inventory item or account, DEPENDING ON YOUR SERVER FRAMEWORK!
+    Name = '', -- The item name or account name depending on the mode, ⚠️DEPENDING ON YOUR SERVER FRAMEWORK!: (black_money / dirty_money)⚠️
+}
+
+
 Framework.SpecificItemLabels = false -- [ true / false ] Set true if you want to use specific item labels for each item (item-laebls/labels.lua)
 
 Framework.AcePermissions = {"command"} -- Add ace permissions here / Default: {"command"} gives admin access to all commands

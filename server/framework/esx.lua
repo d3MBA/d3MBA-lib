@@ -151,6 +151,34 @@ function Framework.RemoveMoney(source, account, amount)
     Player.removeAccountMoney(account, tonumber(amount))
 end
 
+-- Add black money
+function Framework.AddBlackMoney(source, amount)
+    local Player = ESX.GetPlayerFromId(source)
+    local amount = tonumber(amount) or 1
+
+    if Framework.BlackMoney.Mode == "item" then
+        Framework.AddItem(source, Framework.BlackMoney.Name, amount)
+    elseif Framework.BlackMoney.Mode == "account" then
+        Player.addAccountMoney(Framework.BlackMoney.Name, amount)
+    else
+        print("^1[ERROR]^0 Invalid BlackMoney.Mode configured: " .. tostring(Framework.BlackMoney.Mode))
+    end
+end
+
+-- Remove black money
+function Framework.RemoveBlackMoney(source, amount)
+    local Player = ESX.GetPlayerFromId(source)
+    local amount = tonumber(amount) or 1
+
+    if Framework.BlackMoney.Mode == "item" then
+        Framework.RemoveItem(source, Framework.BlackMoney.Name, amount)
+    elseif Framework.BlackMoney.Mode == "account" then
+        Player.removeAccountMoney(Framework.BlackMoney.Name, amount)
+    else
+        print("^1[ERROR]^0 Invalid BlackMoney.Mode configured: " .. tostring(Framework.BlackMoney.Mode))
+    end
+end
+
 -- Create callback
 function Framework.CreateCallback(name, cb)
     ESX.RegisterServerCallback(name, cb)

@@ -155,6 +155,34 @@ function Framework.RemoveMoney(source, account, amount)
     Player.Functions.RemoveMoney(account, tonumber(amount))
 end
 
+-- Add black money 
+function Framework.AddBlackMoney(source, amount)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local amount = tonumber(amount) or 1
+
+    if Framework.BlackMoney.Mode == "item" then
+        Framework.AddItem(source, Framework.BlackMoney.Name, amount)
+    elseif Framework.BlackMoney.Mode == "account" then
+        Player.Functions.AddMoney(Framework.BlackMoney.Name, amount)
+    else
+        print("^1[ERROR]^0 Invalid BlackMoney.Mode configured: " .. tostring(Framework.BlackMoney.Mode))
+    end
+end
+
+-- Remove black money
+function Framework.RemoveBlackMoney(source, amount)
+    local Player = QBCore.Functions.GetPlayer(source)
+    local amount = tonumber(amount) or 1
+
+    if Framework.BlackMoney.Mode == "item" then
+        Framework.RemoveItem(source, Framework.BlackMoney.Name, amount)
+    elseif Framework.BlackMoney.Mode == "account" then
+        Player.Functions.RemoveMoney(Framework.BlackMoney.Name, amount)
+    else
+        print("^1[ERROR]^0 Invalid BlackMoney.Mode configured: " .. tostring(Framework.BlackMoney.Mode))
+    end
+end 
+
 -- Create callback
 function Framework.CreateCallback(name, cb)
     QBCore.Functions.CreateCallback(name, cb)
