@@ -1,3 +1,4 @@
+
 -- ⚠️This config file is used to configure some features for the d3MBA-scripts, TO SETUP THE LIB RESOURCE USE CONFIG.LUA FILE!!!⚠️
 
 Framework.GasMask = { -- Gas mask used for d3MBA drug system scripts
