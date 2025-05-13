@@ -8,83 +8,97 @@
 ---@param controls <boolean> - controls.movement, controls.carMovement, controls.mouse, controls.combat (disable: true/false)
 
 function Framework.ProgressBar(name, label, duration, controls)
+    -- helper that blocks the thread until the exact duration elapses (⚠️DO NOT MODIFY THIS FUNCTION!!!⚠️)
+    local function startBar(startFn) -- ⚠️DO NOT MODIFY THIS FUNCTION!!!⚠️
+        local startTime = GetGameTimer()
+        local durMS = duration * 1000
+        startFn()
+        while GetGameTimer() - startTime < durMS do
+            Wait(0)
+        end
+        return true
+    end
+
+
     ----------------- QB ProgressBar -----------------
     if StringTrim(string.lower(Framework.ProgressBarScript)) == 'qbcore' then 
-        QBCore.Functions.Progressbar(name, label, duration * 1000, false, true, {
-            disableMovement = controls.movement,
-            disableCarMovement = controls.carMovement,
-            disableMouse = controls.mouse,
-            disableCombat = controls.combat,   
-        }, {}, {}, {}, function()
-        end)
-        Wait(duration * 1000) -- ⚠️ IN SOME PROGRESS BARS, THE WAIT FUNCTION IS NOT REQUIRED, IN THIS CASE, PLEASE COMMENT WAIT FUNCTION!
-        return true 
-    ----------------- ESX ProgressBar -----------------
-    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'esx' then 
-        ESX.Progressbar(label, duration * 1000,{
-            FreezePlayer = controls.movement, 
-            animation ={
-                type = "",
-                dict = "", 
-                lib ="" 
-            }, 
-        })
-        return true
-    ----------------- OX ProgressBar -----------------
-    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib' then 
-    -- E.G. FOR OX_LIB PROGRESSBAR, ⚠️IF YOU WANT TO USE OX_LIB PROGRESS BAR YOU NEED TO ADD THIS TO THE fxmanifest.lua file - (shared_script '@ox_lib/init.lua') AND COMMENT WAIT FUNCTION BELOW!⚠️
-        lib.progressBar({
-            duration = duration * 1000,
-            label = label,
-            useWhileDead = false,
-            canCancel = false,
-            disable = {
-                move = controls.movement,
-                car = controls.carMovement,
-                combat = controls.combat,
-                mouse = controls.mouse,
-            },
-        })
-        return true 
-    ----------------- ox_lib circle progressBar -----------------
-    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib_circle' then  
-        lib.progressCircle({
-            duration = duration * 1000,
-            label = label,
-            position = 'bottom',
-            useWhileDead = false,
-            canCancel = false,
-            disable = {
-                move = controls.movement,
-                car = controls.carMovement,
-                combat = controls.combat,
-                mouse = controls.mouse,
-            },
-        })
-        return true
-    ------------------- Mythic ProgressBar -------------------
-    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'mythic' then 
-        TriggerEvent("mythic_progressbar:client:progress", {
-            name = name,
-            duration = duration * 1000,
-            label = label,
-            useWhileDead = false,
-            canCancel = false,
-            controlDisables = {
+        return startBar(function()
+            QBCore.Functions.Progressbar(name, label, duration * 1000, false, true, {
                 disableMovement = controls.movement,
                 disableCarMovement = controls.carMovement,
                 disableMouse = controls.mouse,
-                disableCombat = controls.combat,
-            },
-            }
-        )
-        Wait(duration * 1000)
-        return true
+                disableCombat = controls.combat,   
+            }, {}, {}, {}, function()
+            end)
+        end)
+    ----------------- ESX ProgressBar -----------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'esx' then 
+        return startBar(function()
+            ESX.Progressbar(label, duration * 1000,{
+                FreezePlayer = controls.movement, 
+                animation ={
+                    type = "",
+                    dict = "", 
+                    lib ="" 
+                }, 
+            })
+        end)
+    ----------------- OX ProgressBar -----------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib' then 
+    -- E.G. FOR OX_LIB PROGRESSBAR, ⚠️IF YOU WANT TO USE OX_LIB PROGRESS BAR YOU NEED TO ADD THIS TO THE fxmanifest.lua file - (shared_script '@ox_lib/init.lua') AND COMMENT WAIT FUNCTION BELOW!⚠️
+        return startBar(function()
+            lib.progressBar({
+                duration = duration * 1000,
+                label = label,
+                useWhileDead = false,
+                canCancel = false,
+                disable = {
+                    move = controls.movement,
+                    car = controls.carMovement,
+                    combat = controls.combat,
+                    mouse = controls.mouse,
+                },
+            })
+        end)
+    ----------------- ox_lib circle progressBar -----------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'ox_lib_circle' then  
+        return startBar(function()
+            lib.progressCircle({
+                duration = duration * 1000,
+                label = label,
+                position = 'bottom',
+                useWhileDead = false,
+                canCancel = false,
+                disable = {
+                    move = controls.movement,
+                    car = controls.carMovement,
+                    combat = controls.combat,
+                    mouse = controls.mouse,
+                },
+            })
+        end)
+    ------------------- Mythic ProgressBar -------------------
+    elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'mythic' then 
+        return startBar(function()
+            TriggerEvent("mythic_progressbar:client:progress", {
+                name = name,
+                duration = duration * 1000,
+                label = label,
+                useWhileDead = false,
+                canCancel = false,
+                controlDisables = {
+                    disableMovement = controls.movement,
+                    disableCarMovement = controls.carMovement,
+                    disableMouse = controls.mouse,
+                    disableCombat = controls.combat,
+                },
+                }
+            )
+        end)
     ----------------- Other ProgressBar -----------------
     elseif StringTrim(string.lower(Framework.ProgressBarScript)) == 'other' then 
         -- Here you can add your own progress bar
 
-        Wait(duration * 1000) -- ⚠️ IN SOME PROGRESS BARS, THE WAIT FUNCTION IS NOT REQUIRED, IN THIS CASE, PLEASE COMMENT WAIT FUNCTION!
-        return true 
+        return startBar(function() end) 
     end 
 end
