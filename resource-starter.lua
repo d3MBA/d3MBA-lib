@@ -5,11 +5,11 @@ AddEventHandler('onResourceStart', function(resource)
     if resource == GetCurrentResourceName() then
       -- Start dependent script after library has loaded
         Wait(500)
-        StartResources(Framework.Resources) 
+        StartResources(Framework.Resources)
 
       if Framework.CheckEmptyConfigValues == true then
         CheckEmptyConfigValues() -- Check if any config values are empty or nil
-      end 
+      end
 
     end
 end)
@@ -17,10 +17,22 @@ end)
 -- Start all scripts from Framework.Resources table after library has loaded  
 function StartResources(resources) 
     for i, resource in ipairs(resources) do
-        StopResource(resource)
-        Wait(200) 
-        StartResource(resource)
-        Wait(200) -- Wait for 0.5 seconds between starting each script
+        -- only handle resources that start with "d3MBA-"
+        if resource:match("^d3MBA%-") then
+            -- if it ends with "-stream" or "-prop", only start if not already running
+            if resource:match("%-stream$") or resource:match("%-prop$") then
+                if GetResourceState(resource) ~= "started" then
+                    StartResource(resource)
+                    Wait(200) -- Wait for 0.2 seconds between starting each script
+                end
+            else
+                -- for all other d3MBA- resources, stop then start
+                StopResource(resource)
+                Wait(200)
+                StartResource(resource)
+                Wait(200) -- Wait for 0.2 seconds between starting each script
+            end
+        end
     end
 end
 
