@@ -47,7 +47,7 @@ function Framework.AddItem(source, item, amount, metadata)
     if StringTrim(string.lower(Framework.Inventory)) == "ox_inventory" then
         return exports.ox_inventory:AddItem(source, item, amount, metadata) 
     elseif StringTrim(string.lower(Framework.Inventory)) == "qs-inventory" then
-        return exports['qs-inventory']:AddItem(source, item, amount, _, metadata)
+        return exports['qs-inventory']:GiveItemToPlayer(source, item, amount, _, metadata)
     else
         local AddItem = exports[Framework.Inventory]:AddItem(source, item, amount, _, metadata) -- Weight check 
         if AddItem == true then
@@ -306,7 +306,8 @@ end)
 --- @param ItemName <string> - representing the name of the item to be removed
 --- @param Amount <number> - representing the quantity of the item to be removed
 RegisterNetEvent('d3MBA-lib:server:RemoveItem', function(ItemName, Amount)
-    if ItemName == nil then return end 
+    local source = source -- capture immediately before any yield can overwrite it
+    if ItemName == nil then return end
     -- If the source has the item in the specified amount, remove it
     if Framework.HasItem(source, ItemName, Amount) == true then
         Framework.RemoveItem(source, ItemName, Amount)

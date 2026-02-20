@@ -321,7 +321,8 @@ end)
 --- @param ItemName <string> - representing the name of the item to be removed
 --- @param Amount <number> - representing the quantity of the item to be removed
 RegisterNetEvent('d3MBA-lib:server:RemoveItem', function(ItemName, Amount)
-    if ItemName == nil then return end 
+    local source = source -- capture immediately before any yield can overwrite it
+    if ItemName == nil then return end
     -- If the source has the item in the specified amount, remove it
     if Framework.HasItem(source, ItemName, Amount) == true then
         Framework.RemoveItem(source, ItemName, Amount)
