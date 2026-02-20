@@ -7,7 +7,7 @@ author "d3MBA#0001"
 description "Library for QB-CORE / ESX framework"
 discord "discord.gg/d3MBA"
 
-version "4.1.0" -- Don't touch this
+version "4.2.0" -- Don't touch this
 
 shared_scripts {
     'config/config.lua', -- Config file for the library 
