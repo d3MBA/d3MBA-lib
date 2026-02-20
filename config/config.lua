@@ -9,7 +9,7 @@ Framework.CheckEmptyConfigValues = true -- [ true / false ] Set true if you want
 Framework.Database = '' -- [ 'mysql-async' / 'oxmysql' / 'ghmattimysql' ] Choose your SQL
 Framework.Framework = '' -- [ 'qbcore' / 'esx' ] Choose your framework
 
-Framework.CoreObject = '' -- [ 'qb-core' / 'qbx-core' ] Choose your core object (Only for QBCore and Qbox framework)
+Framework.CoreObject = '' -- [ 'qb-core' / 'qbx-core' ] QBCore/QBx-Core only | ⚠️ Even if you are using QBx-Core, keep this set to 'qb-core' | If you are using ESX leave this empty: ''
 
 Framework.Inventory = '' -- [ 'qb-inventory' / 'ps-inventory' / 'lj-inventory' / 'ox_inventory' / 'qs-inventory' ] Choose your inventory
 
@@ -34,7 +34,7 @@ Framework.Cloathing = '' -- codem-appearance / tgiann-clothing / esx_skin / five
 
 Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'ox_lib' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {
-    Info = 'primary', 
+    Info = 'primary',
     Error = 'error', 
     Success = 'success',    
 }

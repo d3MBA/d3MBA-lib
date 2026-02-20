@@ -17,6 +17,11 @@ function LoadModule(module, selection)
 end
 
 
+-- QBx-Core exposes GetCoreObject() under the resource name 'qb-core', so normalize before any module loads
+if string.lower(Framework.CoreObject):gsub("%s+", "") == 'qbx-core' then
+    Framework.CoreObject = 'qb-core'
+end
+
 LoadModule("framework", Framework.Framework)
 LoadModule("framework", "shared-functions")
 LoadModule("cloathing", Framework.Cloathing)

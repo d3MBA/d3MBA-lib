@@ -16,6 +16,12 @@ function LoadModule(module, selection)
     return fn()
 end
 
+-- QBx-Core exposes GetCoreObject() under the resource name 'qb-core', so normalize before any module loads
+if string.lower(Framework.CoreObject):gsub("%s+", "") == 'qbx-core' then
+    print("^5[d3MBA-lib]^0 CoreObject: ^3'qbx-core'^0 -> overridden to ^3'qb-core'^0")
+    Framework.CoreObject = 'qb-core'
+end
+
 -- Load additional Lua files
 LoadModule("framework", Framework.Framework)
 LoadModule("framework", "shared-functions")
