@@ -7,6 +7,7 @@
 ---@param model <string> - The model of the vehicle to give keys to example: (sultan, rumpo etc...)
 
 RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, model)
+    Wait(500) -- Wait for the vehicle to fully spawn before giving keys | DO NOT REMOVE THIS, IF YOU REMOVE THIS, KEYS MIGHT NOT BE GIVEN TO PLAYER, CAUSING ISSUES
     local vehiclePlate = GetVehicleNumberPlateText(vehicle) or plate
 
     if model == nil then 
@@ -15,7 +16,13 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, mo
 
     ----------------- DEFAULT QB-CORE -----------------
     if StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qbcore' then 
+        local vehiclePlate = vehiclePlate
         TriggerEvent("vehiclekeys:client:SetOwner", vehiclePlate) -- QB-CORE
+    ------------------ QBX-CORE -----------------
+    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qbx-core' then 
+        local vehiclePlate = vehiclePlate
+        -- print("Giving keys for plate: " .. vehiclePlate)
+        TriggerServerEvent("qb-vehiclekeys:server:AcquireVehicleKeys", vehiclePlate) -- QB-CORE (new)
     ----------------- T1GER KEYS -----------------
     elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 't1ger' then
         exports['t1ger_keys']:SetVehicleLocked(vehicle, 0) -- If you using T1GER-KEYS script just uncoment line.
