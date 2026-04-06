@@ -23,7 +23,7 @@ Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] 
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
 Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'cdn-fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
-Framework.VehicleKeysScript = '' -- [ 'qbcore' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'cd-garage' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
+Framework.VehicleKeysScript = '' -- [ 'qbcore'  / 'qbx-core' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'cd-garage' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
 
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'gksphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications
@@ -41,7 +41,7 @@ Framework.NotificationsSettings = {
 
 Framework.BlackMoney = {
     Mode = '', -- [ 'item' / 'account' ] Choose if black money is handled as an inventory item or account, DEPENDING ON YOUR SERVER FRAMEWORK!
-    Name = '', -- The item name or account name depending on the mode, ⚠️DEPENDING ON YOUR SERVER FRAMEWORK!: (black_money / dirty_money)⚠️
+    Name = '', -- The item name or account name depending on the mode, ⚠️DEPENDING ON YOUR SERVER FRAMEWORK!: (black_money / dirty_money / markedbills) QBCORE:(markedbills)⚠️
 }
 
 

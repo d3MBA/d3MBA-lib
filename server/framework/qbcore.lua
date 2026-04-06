@@ -161,7 +161,12 @@ function Framework.AddBlackMoney(source, amount)
     local amount = tonumber(amount) or 1
 
     if Framework.BlackMoney.Mode == "item" then
-        Framework.AddItem(source, Framework.BlackMoney.Name, amount)
+        if Framework.BlackMoney.Name == "markedbills" then
+            local info = { worth = amount }
+            Framework.AddItem(source, "markedbills", 1, info)
+        else
+            Framework.AddItem(source, Framework.BlackMoney.Name, amount)
+        end
     elseif Framework.BlackMoney.Mode == "account" then
         Player.Functions.AddMoney(Framework.BlackMoney.Name, amount)
     else
