@@ -23,7 +23,7 @@ Framework.Menu = '' -- [ 'qb-menu' / 'ox_lib' (ox_contextmenu) / 'nh-context' ] 
 Framework.InputMenu = '' -- [ 'qb-input' / 'ox_lib' (ox_inputmenu) / 'nh-input' ] Set the target script name
 
 Framework.FuelScript = '' -- [ 'LegacyFuel' / 'ox_fuel' / 'cdn-fuel' / 'ps-fuel' / 'lj-fuel' / 'other' ] Set the fuel script name  
-Framework.VehicleKeysScript = '' -- [ 'qbcore'  / 'qbx-core' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'cd-garage' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
+Framework.VehicleKeysScript = '' -- [ 'qbcore'  / 'qbx-core' / 't1ger' / 'qs-vehiclekeys' / 'jaksam' / 'renewed' / 'cd-garage' / 'wasabi' / 'other' ] Set the vehicle keys script (qbcore = default qb-vehiclekeys script)
 
 Framework.PhoneScript = '' -- [ 'qb-phone' / 'qs-smartphone' / 'gksphone' / 'other' ] Set the phone script name (phone notifications)
 Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false ] Set true if you want to use notifications script for phone notifications / mail notifications
@@ -31,6 +31,15 @@ Framework.UseNotificationsScriptForPhoneNotifications = false -- [ true / false 
 Framework.ProgressBarScript = '' -- [ 'qbcore' / 'esx' / 'ox_lib' / 'ox_lib_circle' / 'mythic' / 'other' ] Set the progressbar script
 
 Framework.Cloathing = '' -- codem-appearance / tgiann-clothing / esx_skin / fivem-appearance / illenium-appearance / ox_appearance / qb-clothing
+
+-- 👮 POLICE & DISPATCH SETTINGS 👮 --
+Framework.PoliceJobs = { -- Add all your police job names here
+    'police',
+    'bcso',
+    'sheriff',
+    'sast',
+    'fbi'
+}
 
 Framework.Notifications = '' -- [ 'qbcore' / 'esx' / 'okok' / 'codem' / 'ox_lib' / 'other' ] Set the notifications script
 Framework.NotificationsSettings = {
@@ -40,8 +49,8 @@ Framework.NotificationsSettings = {
 }
 
 Framework.BlackMoney = {
-    Mode = '', -- [ 'item' / 'account' ] Choose if black money is handled as an inventory item or account, DEPENDING ON YOUR SERVER FRAMEWORK!
-    Name = '', -- The item name or account name depending on the mode, ⚠️DEPENDING ON YOUR SERVER FRAMEWORK!: (black_money / dirty_money / markedbills) QBCORE:(markedbills)⚠️
+    Mode = 'item', -- [ 'item' / 'account' ] Choose if black money is handled as an inventory item or account, DEPENDING ON YOUR SERVER FRAMEWORK!
+    Name = 'black_money', -- The item name or account name depending on the mode, ⚠️DEPENDING ON YOUR SERVER FRAMEWORK!: (black_money / dirty_money / markedbills) QBCORE: (markedbills)⚠️
 }
 
 
