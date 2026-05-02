@@ -9,39 +9,69 @@
 RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, model)
     Wait(500) -- Wait for the vehicle to fully spawn before giving keys | DO NOT REMOVE THIS, IF YOU REMOVE THIS, KEYS MIGHT NOT BE GIVEN TO PLAYER, CAUSING ISSUES
     local vehiclePlate = GetVehicleNumberPlateText(vehicle) or plate
+    local keyScript = StringTrim(string.lower(Framework.VehicleKeysScript))
 
     if model == nil then 
         model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
     end 
 
     ----------------- DEFAULT QB-CORE -----------------
-    if StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qbcore' then 
+    if keyScript == 'qbcore' then 
         local vehiclePlate = vehiclePlate
         TriggerEvent("vehiclekeys:client:SetOwner", vehiclePlate) -- QB-CORE
     ------------------ QBX-CORE -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qbx-core' then 
+    elseif keyScript == 'qbx-core' then 
         local vehiclePlate = vehiclePlate
         -- print("Giving keys for plate: " .. vehiclePlate)
         TriggerServerEvent("qb-vehiclekeys:server:AcquireVehicleKeys", vehiclePlate) -- QB-CORE (new)
     ----------------- T1GER KEYS -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 't1ger' then
+    elseif keyScript == 't1ger' then
         exports['t1ger_keys']:SetVehicleLocked(vehicle, 0) -- If you using T1GER-KEYS script just uncoment line.
     ----------------- QUASAR VEHICLE KEYS ----------------- 
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'qs-vehiclekeys' then
+    elseif keyScript == 'qs-vehiclekeys' then
         exports['qs-vehiclekeys']:GiveKeys(vehiclePlate, model)
     ----------------- JAKSAM VEHICLE KEYS -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'jaksam' then
+    elseif keyScript == 'jaksam' then
         TriggerServerEvent("vehicles_keys:selfGiveVehicleKeys", vehiclePlate)
     ----------------- RENEWED VEHICLE KEYS -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'renewed' then
+    elseif keyScript == 'renewed' then
         exports['Renewed-Vehiclekeys']:addKey(vehiclePlate)
     ----------------- CD-GARAGE VEHICLE KEYS -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'cd-garage' then
+    elseif keyScript == 'cd-garage' then
         TriggerEvent('cd_garage:AddKeys', vehiclePlate)
+    ----------------- WASABI CARLOCK -----------------
+    elseif keyScript == 'wasabi' then
+        exports.wasabi_carlock:GiveKey(vehiclePlate)
 
     ----------------- OTHER -----------------
-    elseif StringTrim(string.lower(Framework.VehicleKeysScript)) == 'other' then
+    elseif keyScript == 'other' then
         -- Here you can put event or export to give player vehicle keys
         
     end 
+end)
+
+-- This code is used to remove vehicle keys from player
+---@param vehicle <string> - The vehicle to remove keys from
+---@param plate <string> - The plate of the vehicle to remove keys from
+RegisterNetEvent('d3MBA-lib:client:RemoveVehicleKeys', function(vehicle, plate)
+    local vehiclePlate = GetVehicleNumberPlateText(vehicle) or plate
+    local keyScript = StringTrim(string.lower(Framework.VehicleKeysScript))
+
+    if not vehiclePlate or vehiclePlate == '' then
+        return
+    end
+
+    ----------------- QBX/QB VEHICLE KEYS -----------------
+    if keyScript == 'qbx-core' or keyScript == 'qbcore' then
+        TriggerServerEvent('qb-vehiclekeys:server:removeKeys', vehiclePlate)
+    ----------------- QUASAR VEHICLE KEYS -----------------
+    elseif keyScript == 'qs-vehiclekeys' then
+        exports['qs-vehiclekeys']:RemoveKeys(vehiclePlate)
+    ----------------- WASABI CARLOCK -----------------
+    elseif keyScript == 'wasabi' then
+        exports.wasabi_carlock:RemoveKey(vehiclePlate)
+    ----------------- OTHER -----------------
+    elseif keyScript == 'other' then
+        -- Here you can put event or export to remove player vehicle keys
+    end
 end)
