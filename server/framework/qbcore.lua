@@ -174,6 +174,44 @@ function Framework.AddBlackMoney(source, amount)
     end
 end
 
+--- Gets the player's job details
+--- @param source integer Player server ID
+--- @return table|nil Job table containing {name, label, grade, onDuty}
+function Framework.GetPlayerJob(source)
+    local Player = QBCore.Functions.GetPlayer(source)
+    if Player and Player.PlayerData and Player.PlayerData.job then
+        local job = Player.PlayerData.job
+        return {
+            name = job.name,
+            label = job.label,
+            grade = job.grade.level,
+            onDuty = job.onduty
+        }
+    end
+    return nil
+end
+
+--- Gets the total number of cops (defined in config) currently online and ON DUTY
+--- @return integer Number of cops online and on duty
+function Framework.GetCopCount()
+    local copCount = 0
+    local policeJobs = Framework.PoliceJobs or {'police'}
+
+    local players = QBCore.Functions.GetQBPlayers()
+    for _, Player in pairs(players) do
+        if Player and Player.PlayerData and Player.PlayerData.job then
+            for _, jobName in pairs(policeJobs) do
+                if Player.PlayerData.job.name == jobName and Player.PlayerData.job.onduty then
+                    copCount = copCount + 1
+                    break
+                end
+            end
+        end
+    end
+
+    return copCount
+end
+
 -- Remove black money
 function Framework.RemoveBlackMoney(source, amount)
     local Player = QBCore.Functions.GetPlayer(source)

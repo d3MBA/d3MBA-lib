@@ -165,6 +165,36 @@ function Framework.AddBlackMoney(source, amount)
     end
 end
 
+--- Gets the player's job details
+--- @param source integer Player server ID
+--- @return table|nil Job table containing {name, label, grade, onDuty}
+function Framework.GetPlayerJob(source)
+    local Player = ESX.GetPlayerFromId(source)
+    if Player and Player.job then
+        return {
+            name = Player.job.name,
+            label = Player.job.label,
+            grade = Player.job.grade,
+            onDuty = true -- ESX initially marks onduty by default unless custom duty script is used
+        }
+    end
+    return nil
+end
+
+--- Gets the total number of cops (defined in config) currently online and ON DUTY
+--- @return integer Number of cops online and on duty
+function Framework.GetCopCount()
+    local copCount = 0
+    local policeJobs = Framework.PoliceJobs or {'police'}
+    local players = ESX.GetExtendedPlayers('job', policeJobs)
+
+    if players then
+        copCount = #players
+    end
+
+    return copCount
+end
+
 -- Remove black money
 function Framework.RemoveBlackMoney(source, amount)
     local Player = ESX.GetPlayerFromId(source)
