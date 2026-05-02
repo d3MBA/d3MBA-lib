@@ -1,6 +1,40 @@
 -- Author: d3MBA#0001
 -- Discord server: discord.gg/d3MBA
 
+--- Checks if a player has a specific job and optionally a minimum grade
+--- @param source integer Player server ID
+--- @param jobName string|table Job name or table of job names
+--- @param minGrade integer|nil Minimum grade required (optional)
+--- @return boolean
+function Framework.HasJob(source, jobName, minGrade)
+    local jobData = Framework.GetPlayerJob(source)
+    if not jobData then return false end
+
+    local hasJob = false
+    if type(jobName) == "table" then
+        for _, v in pairs(jobName) do
+            if jobData.name == v then
+                hasJob = true
+                break
+            end
+        end
+    else
+        if jobData.name == jobName then
+            hasJob = true
+        end
+    end
+
+    if not hasJob then return false end
+
+    if minGrade and minGrade > 0 then
+        if jobData.grade < minGrade then
+            return false
+        end
+    end
+
+    return true
+end
+
 -- Error print
 ---@param type <string> -  Type of error 
 ---@param ... <string> -  Error arguments (any)
