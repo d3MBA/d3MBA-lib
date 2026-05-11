@@ -43,6 +43,10 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, mo
     elseif keyScript == 'wasabi' then
         exports.wasabi_carlock:GiveKey(vehiclePlate)
 
+    ----------------- 0R VEHICLE KEYS -----------------
+    elseif keyScript == '0r-vehiclekeys' then
+        exports['0r-vehiclekeys']:GiveKeys(vehiclePlate)
+
     ----------------- OTHER -----------------
     elseif keyScript == 'other' then
         -- Here you can put event or export to give player vehicle keys
@@ -70,6 +74,10 @@ RegisterNetEvent('d3MBA-lib:client:RemoveVehicleKeys', function(vehicle, plate)
     ----------------- WASABI CARLOCK -----------------
     elseif keyScript == 'wasabi' then
         exports.wasabi_carlock:RemoveKey(vehiclePlate)
+
+    ----------------- 0R VEHICLE KEYS -----------------
+    elseif keyScript == '0r-vehiclekeys' then
+        exports['0r-vehiclekeys']:RemoveKeys(vehiclePlate)
     ----------------- OTHER -----------------
     elseif keyScript == 'other' then
         -- Here you can put event or export to remove player vehicle keys

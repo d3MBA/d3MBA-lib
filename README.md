@@ -35,7 +35,7 @@ The configuration file (config.lua) is the heart of this library. It consists of
 ### Fuel and Vehicle Keys Settings
 
 - `Framework.FuelScript`: Set the fuel script name (e.g., 'LegacyFuel', 'ps-fuel', 'lj-fuel', 'other').
-- `Framework.VehicleKeysScript`: Set the vehicle keys script (e.g., 'qbcore', 't1ger', 'qs-vehiclekeys', 'other').
+- `Framework.VehicleKeysScript`: Set the vehicle keys script (e.g., 'qbcore', 'qbx-core', 't1ger', 'qs-vehiclekeys', 'wasabi', '0r-vehiclekeys', 'other').
 
 ### Phone and Notifications Settings
 
@@ -62,7 +62,7 @@ The d3MBA Library Resource offers extensive support for various settings and con
 - License types (license, steam, cid)
 - Target and menu scripts (qb-target, qtarget, qb-menu, ox_lib, nh-context, qb-input, nh-input)
 - Fuel scripts (LegacyFuel, ps-fuel, lj-fuel, other)
-- Vehicle keys scripts (qbcore, t1ger, qs-vehiclekeys, other)
+- Vehicle keys scripts (qbcore, qbx-core, t1ger, qs-vehiclekeys, wasabi, 0r-vehiclekeys, other)
 - Phone scripts (qb-phone, qs-smartphone, other)
 - Progress bar scripts (qbcore, esx, ox_lib, other)
 - Notification scripts (qbcore, esx, okok, codem, other)
