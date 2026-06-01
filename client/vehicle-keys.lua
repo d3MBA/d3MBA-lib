@@ -12,18 +12,20 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, mo
     local keyScript = StringTrim(string.lower(Framework.VehicleKeysScript))
 
     if model == nil then 
-        model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+        if vehicle and DoesEntityExist(vehicle) then
+            model = GetDisplayNameFromVehicleModel(GetEntityModel(vehicle))
+        end
     end 
 
     ----------------- DEFAULT QB-CORE -----------------
     if keyScript == 'qbcore' then 
         local vehiclePlate = vehiclePlate
         TriggerEvent("vehiclekeys:client:SetOwner", vehiclePlate) -- QB-CORE
+        TriggerServerEvent("qb-vehiclekeys:server:AcquireVehicleKeys", vehiclePlate) -- QB-CORE (new)
     ------------------ QBX-CORE -----------------
     elseif keyScript == 'qbx-core' then 
         local vehiclePlate = vehiclePlate
-        -- print("Giving keys for plate: " .. vehiclePlate)
-        TriggerServerEvent("qb-vehiclekeys:server:AcquireVehicleKeys", vehiclePlate) -- QB-CORE (new)
+        TriggerEvent('qb-vehiclekeys:client:AddKeys', vehiclePlate)
     ----------------- T1GER KEYS -----------------
     elseif keyScript == 't1ger' then
         exports['t1ger_keys']:SetVehicleLocked(vehicle, 0) -- If you using T1GER-KEYS script just uncoment line.
@@ -46,6 +48,14 @@ RegisterNetEvent('d3MBA-lib:client:GiveVehicleKeys', function(vehicle, plate, mo
     ----------------- 0R VEHICLE KEYS -----------------
     elseif keyScript == '0r-vehiclekeys' then
         exports['0r-vehiclekeys']:GiveKeys(vehiclePlate)
+
+    ----------------- MRNEWB VEHICLE KEYS -----------------
+    elseif keyScript == 'mrnewbvehiclekeys' then
+        if vehicle and DoesEntityExist(vehicle) then
+            exports.MrNewbVehicleKeys:GiveKeys(vehicle)
+        else
+            exports.MrNewbVehicleKeys:GiveKeysByPlate(vehiclePlate)
+        end
 
     ----------------- OTHER -----------------
     elseif keyScript == 'other' then
@@ -78,6 +88,14 @@ RegisterNetEvent('d3MBA-lib:client:RemoveVehicleKeys', function(vehicle, plate)
     ----------------- 0R VEHICLE KEYS -----------------
     elseif keyScript == '0r-vehiclekeys' then
         exports['0r-vehiclekeys']:RemoveKeys(vehiclePlate)
+
+    ----------------- MRNEWB VEHICLE KEYS -----------------
+    elseif keyScript == 'mrnewbvehiclekeys' then
+        if vehicle and DoesEntityExist(vehicle) then
+            exports.MrNewbVehicleKeys:RemoveKeys(vehicle)
+        else
+            exports.MrNewbVehicleKeys:RemoveKeysByPlate(vehiclePlate)
+        end
     ----------------- OTHER -----------------
     elseif keyScript == 'other' then
         -- Here you can put event or export to remove player vehicle keys
